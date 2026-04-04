@@ -1,149 +1,161 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { IconBie, IconHone, IconSau } from "./components/GardDyrIkoner";
-
-const fokus = [
-  {
-    tittel: "Birøktning",
-    beskrivelse:
-      "Få kuber på tunet. Honning og stell følger årstidene.",
-    ikon: IconBie,
-    href: "/dyrene",
-  },
-  {
-    tittel: "Hønsehold",
-    beskrivelse:
-      "Høner i hagen. Egg til eget bruk og rolig tilsyn.",
-    ikon: IconHone,
-    href: "/dyrene",
-  },
-  {
-    tittel: "Sauehold",
-    beskrivelse:
-      "Sau på beite. Vanlig drift med for, beite og tilsyn.",
-    ikon: IconSau,
-    href: "/dyrene",
-  },
-] as const;
 
 export default function Home() {
   return (
-    <div className="pb-14 md:pb-20">
-      {/* Fullbredde toppbilde */}
-      <figure className="relative w-full overflow-hidden shadow-sm">
-        <div className="relative h-[min(34vh,300px)] w-full min-h-[200px] md:h-[min(36vh,340px)]">
-          <Image
-            src="/images/gardvinter.jpg"
-            alt="Natlandsmyren om vinteren"
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-            priority
-          />
-          <div
-            className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/15 to-transparent"
-            aria-hidden
-          />
-          <figcaption className="absolute inset-x-0 bottom-0 px-5 pb-4 md:px-8 md:pb-5">
-            <h1 className="font-display text-2xl font-semibold tracking-tight text-cream md:text-3xl lg:text-[2rem]">
-              Natlandsmyren
-            </h1>
-          </figcaption>
+    <div className="bg-oatmeal text-moss">
+      {/* Toppbilde */}
+      <section className="px-4 pb-2 pt-6 md:px-6 md:pb-4 md:pt-8" aria-label="Illustrasjon fra gården">
+        <div className="mx-auto max-w-4xl">
+          <figure className="relative aspect-[2/1] w-full overflow-hidden rounded-[1.75rem] shadow-sm ring-1 ring-moss/8 sm:aspect-[2.1/1] md:rounded-[2rem] md:aspect-[2.2/1]">
+            <Image
+              src="/images/gardvinter.jpg"
+              alt="Natlandsmyren om vinteren"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 896px) 100vw, 896px"
+              priority
+            />
+          </figure>
         </div>
-      </figure>
+      </section>
 
-      {/* Tre søyler – tett under bildet, laptop-vennlig */}
-      <div className="mx-auto max-w-6xl px-4 pt-3 md:px-6 md:pt-4">
-        <ul className="grid gap-3 sm:grid-cols-3 sm:gap-3 md:gap-4">
-          {fokus.map(({ tittel, beskrivelse, ikon: Ikon, href }) => (
-            <li key={tittel}>
-              <article className="flex h-full flex-col rounded-2xl border border-sage-soft/50 bg-cream-muted/50 p-4 shadow-sm transition hover:border-sage-soft hover:shadow md:p-5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sage-soft/70 text-sage-dark">
-                  <Ikon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
-                </div>
-                <h2 className="font-display mt-3 text-base font-semibold text-ink md:text-lg">
-                  {tittel}
-                </h2>
-                <p className="mt-1.5 flex-1 text-xs leading-relaxed text-ink-muted md:text-sm">
-                  {beskrivelse}
-                </p>
-                <Link
-                  href={href}
-                  className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-sage-dark transition hover:gap-1.5 md:text-sm"
-                >
-                  Mer
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden />
-                </Link>
-              </article>
-            </li>
-          ))}
-        </ul>
+      {/* Tittel & intro */}
+      <header className="px-4 pb-16 pt-10 text-center md:px-6 md:pb-20 md:pt-12">
+        <h1 className="font-sans text-[clamp(2rem,5vw,2.75rem)] font-light tracking-[0.04em] text-moss">
+          natlandsmyren
+        </h1>
+        <div
+          className="mx-auto mt-8 h-px w-12 bg-ochre/45"
+          aria-hidden
+        />
+        <p className="mx-auto mt-8 max-w-md text-base leading-relaxed text-moss-muted md:max-w-lg md:text-lg md:leading-relaxed">
+          Gården ligger på myra. Det er ikke bare et stedsnavn – myr og våtmark
+          preger både beite, planter og humøret i hverdagen. Vi driver smått,
+          men med omtanke for det landskapet vi er en del av.
+        </p>
+      </header>
 
-        {/* Historie – bilde venstre, større */}
-        <section
-          className="mt-10 md:mt-12"
-          aria-labelledby="historie-forhåndsvisning"
+      {/* Sauene */}
+      <section
+        className="border-t border-moss/8 px-4 py-14 text-center md:px-6 md:py-20"
+        aria-labelledby="sau-tittel"
+      >
+        <div className="mx-auto flex justify-center text-terra">
+          <IconSau className="h-9 w-9 md:h-10 md:w-10" strokeWidth={1.5} aria-hidden />
+        </div>
+        <h2
+          id="sau-tittel"
+          className="mt-6 font-display text-xl font-medium tracking-tight text-moss md:text-2xl"
         >
-          <div className="overflow-hidden rounded-2xl border border-sage-dark/12 bg-sage-dark text-cream shadow-md md:rounded-[1.35rem]">
-            <div className="flex flex-col md:flex-row md:items-stretch">
-              <div className="relative aspect-[5/4] w-full shrink-0 border-b border-cream/10 md:w-[min(44%,320px)] md:border-b-0 md:border-r md:aspect-auto md:min-h-[280px]">
-                <Image
-                  src="/images/emblem.jpg"
-                  alt="Emblem for Natlandsmyren"
-                  fill
-                  className="object-contain p-6 md:p-8"
-                  sizes="(max-width: 768px) 100vw, 320px"
-                />
-              </div>
-              <div className="flex flex-1 flex-col justify-center px-6 py-7 md:px-8 md:py-8 lg:px-10">
-                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-sage-light/95">
-                  Historie
-                </p>
-                <h2
-                  id="historie-forhåndsvisning"
-                  className="font-display mt-1.5 text-xl font-semibold leading-snug md:text-2xl"
-                >
-                  Om gården
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-cream/88 md:text-[0.9375rem]">
-                  Gården har lang brukshistorie. Vi samler det vi vet på egen
-                  side, med årstall og fakta der vi har det.
-                </p>
-                <Link
-                  href="/historie"
-                  className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-cream/30 bg-cream/10 px-4 py-2 text-sm font-medium text-cream transition hover:bg-cream/15"
-                >
-                  Historie-siden
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
-              </div>
-            </div>
+          Sauene
+        </h2>
+        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-moss-muted md:max-w-lg md:text-base md:leading-relaxed">
+          Sau på beite rundt gården og ut mot myrkanten. Vi legger vekt på rolig
+          gang, nok beite og tilsyn – landskapet rundt får være med å bestemme
+          tempoet.
+        </p>
+      </section>
+
+      {/* Biene */}
+      <section
+        className="border-t border-moss/8 px-4 py-14 text-center md:px-6 md:py-20"
+        aria-labelledby="bie-tittel"
+      >
+        <div className="mx-auto flex justify-center text-terra">
+          <IconBie className="h-9 w-9 md:h-10 md:w-10" strokeWidth={1.5} aria-hidden />
+        </div>
+        <h2
+          id="bie-tittel"
+          className="mt-6 font-display text-xl font-medium tracking-tight text-moss md:text-2xl"
+        >
+          Biene
+        </h2>
+        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-moss-muted md:max-w-lg md:text-base md:leading-relaxed">
+          Bikuber på tunet gir honning når året tillater det. Pollinering henger
+          naturlig sammen med alt som gror i hagkanten og langs myra – vi prøver
+          ikke å presse mer ut enn naturen rekker.
+        </p>
+      </section>
+
+      {/* Hønene */}
+      <section
+        className="border-t border-moss/8 px-4 py-14 text-center md:px-6 md:py-20"
+        aria-labelledby="hone-tittel"
+      >
+        <div className="mx-auto flex justify-center text-terra">
+          <IconHone className="h-9 w-9 md:h-10 md:w-10" strokeWidth={1.5} aria-hidden />
+        </div>
+        <h2
+          id="hone-tittel"
+          className="mt-6 font-display text-xl font-medium tracking-tight text-moss md:text-2xl"
+        >
+          Hønene
+        </h2>
+        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-moss-muted md:max-w-lg md:text-base md:leading-relaxed">
+          Høner som får gå løst i hagen. Egg til huset, litt rot i bedene og
+          liv i tunet. En enkel ordning som passer oss – ikke mer styr enn vi
+          orker å følge opp.
+        </p>
+      </section>
+
+      {/* Historie */}
+      <section
+        className="border-t border-moss/8 px-4 py-16 text-center md:px-6 md:py-24"
+        aria-labelledby="historie-tittel"
+      >
+        <div className="mx-auto w-fit rounded-[1.35rem] border border-terra/25 bg-oatmeal-muted/80 p-6 shadow-sm ring-1 ring-moss/5 md:p-10">
+          <div className="relative mx-auto h-44 w-44 sm:h-52 sm:w-52 md:h-56 md:w-56">
+            <Image
+              src="/images/emblem.jpg"
+              alt="Emblem for Natlandsmyren"
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 176px, 224px"
+            />
           </div>
-        </section>
-
-        <section
-          className="mt-10 rounded-2xl border border-sage-soft/45 bg-cream-muted/40 px-6 py-8 text-center md:mt-12 md:px-8 md:py-9"
-          aria-labelledby="kontakt-cta"
+        </div>
+        <h2
+          id="historie-tittel"
+          className="mt-10 font-display text-xl font-medium tracking-tight text-moss md:mt-12 md:text-2xl"
         >
-          <h2
-            id="kontakt-cta"
-            className="font-display text-base font-semibold text-ink md:text-lg"
-          >
-            Kontakt
-          </h2>
-          <p className="mx-auto mt-2 max-w-sm text-sm text-ink-muted">
-            Melding om sau, honning, høner eller historie.
-          </p>
-          <Link
-            href="/kontakt"
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-sage px-6 py-2.5 text-sm font-medium text-cream transition hover:bg-sage-dark"
-          >
-            Kontaktside
-            <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
-        </section>
-      </div>
+          Historien
+        </h2>
+        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-moss-muted md:max-w-lg md:text-base md:leading-relaxed">
+          Gården har vært i bruk lenge. Vi har samlet det vi vet – årstall,
+          bygninger og minner – på en egen side, så du kan lese i ro og mak.
+        </p>
+        <Link
+          href="/historie"
+          className="mt-8 inline-block text-sm font-medium text-terra underline decoration-terra/35 underline-offset-4 transition hover:decoration-terra"
+        >
+          Les mer om historien
+        </Link>
+      </section>
+
+      {/* Kontakt */}
+      <section
+        className="border-t border-moss/8 px-4 py-14 text-center md:px-6 md:py-20"
+        aria-labelledby="kontakt-tittel"
+      >
+        <h2
+          id="kontakt-tittel"
+          className="font-display text-lg font-medium text-moss md:text-xl"
+        >
+          Kontakt
+        </h2>
+        <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-moss-muted md:max-w-md md:text-base">
+          Har du spørsmål om gården, dyra eller historien, er det bare å ta
+          kontakt.
+        </p>
+        <Link
+          href="/kontakt"
+          className="mt-8 inline-flex items-center justify-center rounded-full bg-terra px-7 py-2.5 text-sm font-medium text-oatmeal transition hover:bg-terra-light"
+        >
+          Til kontaktsiden
+        </Link>
+      </section>
     </div>
   );
 }

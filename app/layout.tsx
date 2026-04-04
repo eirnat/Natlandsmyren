@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="no" className={`${dmSans.variable} ${fraunces.variable}`}>
-      <body className="flex min-h-screen flex-col bg-cream font-sans text-ink antialiased">
+      <body className="flex min-h-screen flex-col bg-oatmeal font-sans text-moss antialiased">
         <SiteTopBar />
         <main className="flex-1">{children}</main>
         <FarmFooter />

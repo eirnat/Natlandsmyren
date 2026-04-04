@@ -1,25 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  /* Kremhvit – luftig bakgrunn */
-  --cream: #faf8f3;
-  --cream-muted: #f3efe6;
-  --cream-deep: #ebe4d6;
-  /* Salviegrønn */
-  --sage: #7d8f6f;
-  --sage-dark: #5f6e54;
-  --sage-light: #a8b89a;
-  --sage-soft: #dce3d4;
-  /* Honninggul */
-  --honey: #c9a227;
-  --honey-light: #e4c76a;
-  --honey-soft: #f5e6b8;
-  /* Tekst – varm, lesbar */
-  --ink: #3a362f;
-  --ink-muted: #6b655a;
+  /* Oatmeal / papir */
+  --oatmeal: #fdfbf7;
+  --oatmeal-muted: #f4efe6;
+  --oatmeal-deep: #e8e2d6;
+  /* Mosegrønn tekst */
+  --moss: #2d362d;
+  --moss-muted: #586056;
+  /* Terracotta & honning-oker */
+  --terra: #9e5b4a;
+  --terra-light: #c07862;
+  --ochre: #b8923d;
+  --ochre-soft: #e8d4a8;
+  /* Alias (bakoverkompatibilitet) */
+  --cream: var(--oatmeal);
+  --cream-muted: var(--oatmeal-muted);
+  --cream-deep: var(--oatmeal-deep);
+  --ink: var(--moss);
+  --ink-muted: var(--moss-muted);
+  --sage: #4d5c4d;
+  --sage-dark: #3a453a;
+  --sage-light: #6d7b6a;
+  --sage-soft: #d4d9cf;
+  --honey: var(--ochre);
+  --honey-light: #c9a85a;
+  --honey-soft: var(--ochre-soft);
 }
 
 @theme inline {
+  --color-oatmeal: var(--oatmeal);
+  --color-oatmeal-muted: var(--oatmeal-muted);
+  --color-oatmeal-deep: var(--oatmeal-deep);
+  --color-moss: var(--moss);
+  --color-moss-muted: var(--moss-muted);
+  --color-terra: var(--terra);
+  --color-terra-light: var(--terra-light);
+  --color-ochre: var(--ochre);
+  --color-ochre-soft: var(--ochre-soft);
   --color-cream: var(--cream);
   --color-cream-muted: var(--cream-muted);
   --color-cream-deep: var(--cream-deep);
@@ -37,23 +55,21 @@
 }
 
 body {
-  background: var(--cream);
-  color: var(--ink);
+  background: var(--oatmeal);
+  color: var(--moss);
   font-family: var(--font-dm-sans), system-ui, sans-serif;
 }
 
-/* Lun, lett rustikk tekstur (svært diskret) */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.028;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   z-index: 9999;
 }
 
-/* Avrundede bilder globalt */
 .prose-farm img,
 .farm-img {
   border-radius: 1.25rem;
