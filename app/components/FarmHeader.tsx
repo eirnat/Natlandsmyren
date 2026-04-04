@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GARD_NAVN } from "../lib/gard";
+import { GARD_HEADER_NAVN } from "../lib/gard";
 
 const lenker = [
   { href: "/", label: "Hjem" },
@@ -16,7 +16,7 @@ export function FarmHeader() {
           href="/"
           className="font-display text-xl font-semibold tracking-tight text-sage-dark transition-colors hover:text-honey md:text-2xl"
         >
-          {GARD_NAVN}
+          {GARD_HEADER_NAVN}
         </Link>
         <nav aria-label="Hovedmeny">
           <ul className="flex flex-wrap items-center gap-1 sm:gap-2">
