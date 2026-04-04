@@ -1,22 +1,60 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f1e9;
-  --foreground: #2b2d42;
-  --accent-primary: #a7c957;
-  --accent-secondary: #bc6c49;
+  /* Kremhvit – luftig bakgrunn */
+  --cream: #faf8f3;
+  --cream-muted: #f3efe6;
+  --cream-deep: #ebe4d6;
+  /* Salviegrønn */
+  --sage: #7d8f6f;
+  --sage-dark: #5f6e54;
+  --sage-light: #a8b89a;
+  --sage-soft: #dce3d4;
+  /* Honninggul */
+  --honey: #c9a227;
+  --honey-light: #e4c76a;
+  --honey-soft: #f5e6b8;
+  /* Tekst – varm, lesbar */
+  --ink: #3a362f;
+  --ink-muted: #6b655a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-meadow: var(--accent-primary);
-  --color-terra: var(--accent-secondary);
-  --font-sans: var(--font-lexend);
+  --color-cream: var(--cream);
+  --color-cream-muted: var(--cream-muted);
+  --color-cream-deep: var(--cream-deep);
+  --color-sage: var(--sage);
+  --color-sage-dark: var(--sage-dark);
+  --color-sage-light: var(--sage-light);
+  --color-sage-soft: var(--sage-soft);
+  --color-honey: var(--honey);
+  --color-honey-light: var(--honey-light);
+  --color-honey-soft: var(--honey-soft);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-fraunces);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-lexend), Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+/* Lun, lett rustikk tekstur (svært diskret) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 9999;
+}
+
+/* Avrundede bilder globalt */
+.prose-farm img,
+.farm-img {
+  border-radius: 1.25rem;
 }
