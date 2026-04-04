@@ -21,7 +21,7 @@ export function FarmFooter() {
             <Link
               key={href}
               href={href}
-              className="text-moss-muted transition hover:text-terra"
+              className="text-moss-muted transition-all duration-200 hover:text-ochre active:opacity-70"
             >
               {label}
             </Link>
