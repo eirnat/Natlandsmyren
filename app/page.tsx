@@ -75,12 +75,12 @@ export default function Home() {
           </ul>
         </section>
 
-        {/* Historie – to kolonner på stor skjerm */}
+        {/* Historie – to kolonner på stor skjerm; emblem fyller hele høyre rute */}
         <section
-          className="mt-12 rounded-2xl border border-[#2d362d]/10 bg-[#faf7f1] p-6 shadow-sm sm:mt-14 sm:p-8 md:mt-16 md:p-10 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:p-12"
+          className="mt-12 overflow-hidden rounded-2xl border border-[#2d362d]/10 bg-[#faf7f1] shadow-sm sm:mt-14 md:mt-16 lg:grid lg:grid-cols-2 lg:items-stretch"
           aria-labelledby="historie-heading"
         >
-          <div className="text-center lg:text-left">
+          <div className="p-6 text-center sm:p-8 md:p-10 lg:p-12 lg:text-left">
             <h2
               id="historie-heading"
               className="font-display text-xl font-semibold tracking-tight text-[#2d362d] sm:text-2xl md:text-3xl"
@@ -103,16 +103,14 @@ export default function Home() {
               .
             </p>
           </div>
-          <div className="relative mx-auto mt-8 w-full max-w-sm lg:mx-0 lg:mt-0 lg:max-w-none">
-            <div className="relative aspect-[4/3] min-h-[200px] w-full overflow-hidden rounded-xl border border-[#2d362d]/10 bg-[#2d362d]/5 sm:min-h-[240px] lg:aspect-auto lg:min-h-[min(100%,22rem)]">
-              <Image
-                src="/images/emblem.jpg"
-                alt="Emblem for Natlandsmyren"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
+          <div className="relative min-h-[220px] w-full sm:min-h-[260px] lg:h-full lg:min-h-0">
+            <Image
+              src="/images/emblem.jpg"
+              alt="Emblem for Natlandsmyren"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1023px) 100vw, 50vw"
+            />
           </div>
         </section>
       </div>
