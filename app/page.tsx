@@ -123,16 +123,14 @@ export default function Home() {
               .
             </p>
           </div>
-          <div className="flex min-h-[280px] w-full items-center justify-center border-t-2 border-[#2D362D] bg-[#F3EFE6] p-10 sm:min-h-[300px] sm:p-12 md:min-h-[320px] md:p-14 lg:min-h-full lg:border-l-2 lg:border-t-0">
-            <div className="relative aspect-square w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px]">
-              <Image
-                src="/images/emblem.jpg"
-                alt="Emblem for Natlandsmyren"
-                fill
-                className="object-contain object-center drop-shadow-[0_10px_28px_rgba(0,0,0,0.15)]"
-                sizes="(max-width: 1023px) 280px, 360px"
-              />
-            </div>
+          <div className="relative min-h-[280px] w-full border-t-2 border-[#2D362D] bg-[#F3EFE6] sm:min-h-[300px] md:min-h-[320px] lg:min-h-0 lg:h-full lg:border-l-2 lg:border-t-0">
+            <Image
+              src="/images/emblem.jpg"
+              alt="Emblem for Natlandsmyren"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1023px) 100vw, 50vw"
+            />
           </div>
         </section>
       </div>
