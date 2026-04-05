@@ -32,7 +32,7 @@ const fliser: {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#9B7039] text-[#1A2419]">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Hero */}
       <section className="w-full" aria-labelledby="hero-heading">
         <div className="relative aspect-[5/3] w-full min-h-[220px] sm:aspect-[2.2/1] sm:min-h-[260px] md:aspect-[2.6/1] md:min-h-[300px] lg:min-h-[340px]">
@@ -70,7 +70,7 @@ export default function Home() {
               <li key={tittel}>
                 <Link
                   href={href}
-                  className="group flex min-h-[18rem] flex-col items-center rounded-2xl border-2 border-[#2D362D] bg-[#FAF8F2] px-5 py-8 text-center shadow-[0_12px_40px_rgba(0,0,0,0.22)] transition-all duration-300 ease-out hover:border-[#2D362D] hover:bg-[#2D362D] hover:shadow-[0_18px_48px_rgba(0,0,0,0.35)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#2D362D] sm:min-h-[19rem] sm:px-6 sm:py-9"
+                  className="group flex min-h-[18rem] flex-col items-center rounded-2xl border-2 border-moss bg-card px-5 py-8 text-center shadow-[0_12px_40px_rgba(0,0,0,0.22)] transition-all duration-300 ease-out hover:border-moss hover:bg-moss hover:shadow-[0_18px_48px_rgba(0,0,0,0.35)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-moss sm:min-h-[19rem] sm:px-6 sm:py-9"
                 >
                   <Image
                     src={figur}
@@ -80,10 +80,10 @@ export default function Home() {
                     className="h-16 w-16 shrink-0 object-contain"
                     aria-hidden
                   />
-                  <span className="mt-5 text-lg font-bold tracking-tight text-[#1A2419] transition-colors duration-300 group-hover:text-white">
+                  <span className="mt-5 text-lg font-bold tracking-tight text-foreground transition-colors duration-300 group-hover:text-white">
                     {tittel}
                   </span>
-                  <span className="mt-3 max-w-[22rem] text-sm font-medium leading-relaxed text-[#1A2419] transition-colors duration-300 group-hover:text-white sm:max-w-none">
+                  <span className="mt-3 max-w-[22rem] text-sm font-medium leading-relaxed text-foreground transition-colors duration-300 group-hover:text-white sm:max-w-none">
                     {beskrivelse}
                   </span>
                 </Link>
@@ -94,36 +94,36 @@ export default function Home() {
 
         {/* Historie – statement */}
         <section
-          className="mt-16 overflow-hidden rounded-2xl border-2 border-[#2D362D] bg-[#FAF8F2] shadow-[0_16px_48px_rgba(0,0,0,0.2)] sm:mt-20 md:mt-24 lg:grid lg:grid-cols-2 lg:items-stretch"
+          className="mt-16 overflow-hidden rounded-2xl border-2 border-moss bg-card shadow-[0_16px_48px_rgba(0,0,0,0.2)] sm:mt-20 md:mt-24 lg:grid lg:grid-cols-2 lg:items-stretch"
           aria-labelledby="historie-heading"
         >
           <div className="flex flex-col justify-center p-8 text-center sm:p-10 md:p-12 lg:p-14 lg:text-left">
-            <p className="font-sans text-xs font-bold uppercase tracking-[0.2em] text-[#2D362D]">
+            <p className="font-sans text-xs font-bold uppercase tracking-[0.2em] text-moss">
               Historie
             </p>
             <h2
               id="historie-heading"
-              className="mt-3 font-display text-2xl font-bold leading-tight tracking-tight text-[#1A2419] sm:text-3xl md:text-4xl"
+              className="mt-3 font-display text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl md:text-4xl"
             >
               Historien om Natlandsmyr
             </h2>
-            <p className="mt-8 text-base font-medium leading-relaxed text-[#1A2419] sm:text-lg sm:leading-relaxed">
+            <p className="mt-8 text-base font-medium leading-relaxed text-foreground sm:text-lg sm:leading-relaxed">
               Gården ligger ved myren. Brukshistorien strekker seg over mange
               år – bygninger, generasjoner og hverdagen på tunet kan du kort
               beskrive her.
             </p>
-            <p className="mt-6 text-base font-medium leading-relaxed text-[#1A2419] sm:text-lg">
+            <p className="mt-6 text-base font-medium leading-relaxed text-foreground sm:text-lg">
               Les mer på{" "}
               <Link
                 href="/historie"
-                className="font-bold text-[#2D362D] underline decoration-[#2D362D] decoration-4 underline-offset-[5px] transition hover:text-[#1A2419] hover:decoration-[#1A2419]"
+                className="font-bold text-moss underline decoration-moss decoration-4 underline-offset-[5px] transition hover:text-foreground hover:decoration-foreground"
               >
                 historie-siden
               </Link>
               .
             </p>
           </div>
-          <div className="relative min-h-[280px] w-full border-t-2 border-[#2D362D] bg-[#F3EFE6] sm:min-h-[300px] md:min-h-[320px] lg:min-h-0 lg:h-full lg:border-l-2 lg:border-t-0">
+          <div className="relative min-h-[280px] w-full border-t-2 border-moss bg-cream-deep sm:min-h-[300px] md:min-h-[320px] lg:min-h-0 lg:h-full lg:border-l-2 lg:border-t-0">
             <Image
               src="/images/emblem.jpg"
               alt="Emblem for Natlandsmyren"
