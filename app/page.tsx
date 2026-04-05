@@ -1,28 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Egg, Hexagon, Mountain } from "lucide-react";
+import { Egg, Mountain } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { CSSProperties } from "react";
 
-const fliser: {
+type Flis = {
   tittel: string;
   beskrivelse: string;
-  ikon: LucideIcon;
   href: string;
   accent: string;
-}[] = [
+} & (
+  | { ikon: LucideIcon; bilde?: undefined }
+  | { bilde: string; ikon?: undefined }
+);
+
+const fliser: Flis[] = [
   {
     tittel: "Birøkt",
     beskrivelse:
-      "Gyllen lynghonning fra myra – aromatisk og tydelig forankret i lyngheia rundt gården. Honning med karakter, hentet hjem fra kubene på Natlandsmyren.",
-    ikon: Hexagon,
+      "Honning med karakter, hentet hjem fra kubene på Natlandsmyren.",
+    bilde: "/images/bie.png",
     href: "/birøkt",
     accent: "#D48420",
   },
   {
     tittel: "Hønsehold",
     beskrivelse:
-      "Ferske gårdsegg fra hønene på tunet – hver dag, rett fra huset. Frittgående høner som trives ute gir egg du merker på smaken.",
+      "Ferske gårdsegg fra hønene på tunet – hver dag, rett fra huset. Frittgående høner som trives ute.",
     ikon: Egg,
     href: "/hønsehold",
     accent: "#A64B2A",
@@ -30,7 +34,7 @@ const fliser: {
   {
     tittel: "Sauehold",
     beskrivelse:
-      "Gammelnorsk spælsau med den unike vikingulla – robuste sauer som kjenner myra og holder landskapet i form, beite for beite.",
+      "Gammelnorsk spælsau – robuste sauer som kjenner myra og holder landskapet i form, beite for beite.",
     ikon: Mountain,
     href: "/sauehold",
     accent: "#3E4A3E",
@@ -73,19 +77,37 @@ export default function Home() {
             Birøkt, hønsehold og sauehold
           </h2>
           <ul className="mx-auto grid max-w-5xl grid-cols-1 gap-7 sm:grid-cols-3 sm:gap-6 md:gap-8">
-            {fliser.map(({ tittel, beskrivelse, ikon: Ikon, href, accent }) => (
+            {fliser.map((flis) => {
+              const { tittel, beskrivelse, href, accent } = flis;
+              return (
               <li key={tittel}>
                 <Link
                   href={href}
                   className="group flex min-h-[18rem] flex-col items-center rounded-2xl border-2 border-[#2D362D] bg-[#FAF8F2] px-5 py-8 text-center shadow-[0_12px_40px_rgba(0,0,0,0.22)] transition-all duration-300 ease-out hover:border-[#2D362D] hover:bg-[#2D362D] hover:shadow-[0_18px_48px_rgba(0,0,0,0.35)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#2D362D] sm:min-h-[19rem] sm:px-6 sm:py-9"
                   style={{ "--ikon-accent": accent } as CSSProperties}
                 >
-                  <Ikon
-                    size={64}
-                    className="shrink-0 text-[var(--ikon-accent)] transition-colors duration-300 group-hover:text-white"
-                    strokeWidth={1.5}
-                    aria-hidden
-                  />
+                  {"bilde" in flis && flis.bilde ? (
+                    <Image
+                      src={flis.bilde}
+                      alt=""
+                      width={64}
+                      height={64}
+                      className="h-16 w-16 shrink-0 object-contain"
+                      aria-hidden
+                    />
+                  ) : (
+                    (() => {
+                      const Ikon = flis.ikon;
+                      return (
+                        <Ikon
+                          size={64}
+                          className="shrink-0 text-[var(--ikon-accent)] transition-colors duration-300 group-hover:text-white"
+                          strokeWidth={1.5}
+                          aria-hidden
+                        />
+                      );
+                    })()
+                  )}
                   <span className="mt-5 text-lg font-bold tracking-tight text-[#1A2419] transition-colors duration-300 group-hover:text-white">
                     {tittel}
                   </span>
@@ -94,7 +116,8 @@ export default function Home() {
                   </span>
                 </Link>
               </li>
-            ))}
+              );
+            })}
           </ul>
         </section>
 
