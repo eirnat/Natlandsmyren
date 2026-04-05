@@ -103,13 +103,13 @@ export default function Home() {
               .
             </p>
           </div>
-          <div className="relative mx-auto mt-8 aspect-square w-full max-w-sm lg:mx-0 lg:mt-0 lg:max-w-none">
-            <div className="relative h-full min-h-[240px] w-full overflow-hidden rounded-xl border border-[#2d362d]/10 bg-[#fdfbf7] sm:min-h-[280px] lg:min-h-[min(100%,320px)]">
+          <div className="relative mx-auto mt-8 w-full max-w-sm lg:mx-0 lg:mt-0 lg:max-w-none">
+            <div className="relative aspect-[4/3] min-h-[200px] w-full overflow-hidden rounded-xl border border-[#2d362d]/10 bg-[#2d362d]/5 sm:min-h-[240px] lg:aspect-auto lg:min-h-[min(100%,22rem)]">
               <Image
                 src="/images/emblem.jpg"
                 alt="Emblem for Natlandsmyren"
                 fill
-                className="object-contain p-4 sm:p-6"
+                className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
