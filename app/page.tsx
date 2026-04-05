@@ -1,40 +1,45 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Bird, Bug, Cloud } from "lucide-react";
+import { Egg, Hexagon, Mountain } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-
-/** Lucide har ikke eget Bee-ikon; Bug gir samme stroke-stil og fungerer som birøkt-symbol. */
-const BirøktIkon = Bug;
+import type { CSSProperties } from "react";
 
 const fliser: {
   tittel: string;
   beskrivelse: string;
   ikon: LucideIcon;
   href: string;
+  accent: string;
 }[] = [
   {
     tittel: "Birøkt",
-    beskrivelse: "Honning og bikuber.",
-    ikon: BirøktIkon,
+    beskrivelse:
+      "Gyllen lynghonning fra myra – aromatisk og tydelig forankret i lyngheia rundt gården. Honning med karakter, hentet hjem fra kubene på Natlandsmyren.",
+    ikon: Hexagon,
     href: "/birøkt",
+    accent: "#D48420",
   },
   {
     tittel: "Hønsehold",
-    beskrivelse: "Høner og egg.",
-    ikon: Bird,
+    beskrivelse:
+      "Ferske gårdsegg fra hønene på tunet – hver dag, rett fra huset. Frittgående høner som trives ute gir egg du merker på smaken.",
+    ikon: Egg,
     href: "/hønsehold",
+    accent: "#A64B2A",
   },
   {
     tittel: "Sauehold",
-    beskrivelse: "Sau på beite.",
-    ikon: Cloud,
+    beskrivelse:
+      "Gammelnorsk spælsau med den unike vikingulla – robuste sauer som kjenner myra og holder landskapet i form, beite for beite.",
+    ikon: Mountain,
     href: "/sauehold",
+    accent: "#3E4A3E",
   },
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#F5E9D3] text-[#2D332A]">
+    <div className="min-h-screen bg-[#9B7039] text-[#1A2419]">
       {/* Hero */}
       <section className="w-full" aria-labelledby="hero-heading">
         <div className="relative aspect-[5/3] w-full min-h-[220px] sm:aspect-[2.2/1] sm:min-h-[260px] md:aspect-[2.6/1] md:min-h-[300px] lg:min-h-[340px]">
@@ -46,11 +51,14 @@ export default function Home() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 z-[1] bg-black/30" aria-hidden />
-          <div className="absolute inset-x-0 top-0 z-[2] px-5 pt-6 sm:px-8 sm:pt-8 md:px-12 md:pt-10 lg:px-16 lg:pt-12 xl:pt-14">
+          <div
+            className="absolute inset-0 z-[1] bg-black/60 sm:bg-black/58"
+            aria-hidden
+          />
+          <div className="absolute inset-0 z-[2] flex items-center justify-center px-5 sm:px-8 md:px-12 lg:px-16">
             <h1
               id="hero-heading"
-              className="mx-auto max-w-6xl text-center font-sans text-[clamp(1.5rem,5vw+0.75rem,2.5rem)] font-semibold leading-[1.12] tracking-[0.02em] text-white/95 sm:text-[clamp(1.75rem,4.5vw+1rem,3rem)] md:text-[clamp(2rem,3.5vw+1.25rem,3.75rem)] lg:text-6xl lg:leading-[1.08] xl:text-7xl"
+              className="max-w-5xl text-center font-sans text-[clamp(1.875rem,5.5vw+0.5rem,3rem)] font-black leading-[1.08] tracking-tight text-white drop-shadow-[0_4px_32px_rgba(0,0,0,0.75)] sm:text-[clamp(2.125rem,5vw+0.75rem,3.5rem)] md:text-[clamp(2.5rem,4vw+1rem,4rem)] lg:text-6xl lg:leading-[1.06] xl:text-7xl"
             >
               Velkommen til Natlandsmyren
             </h1>
@@ -64,22 +72,24 @@ export default function Home() {
           <h2 id="aktivitet-heading" className="sr-only">
             Birøkt, hønsehold og sauehold
           </h2>
-          <ul className="mx-auto grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6 md:gap-8">
-            {fliser.map(({ tittel, beskrivelse, ikon: Ikon, href }) => (
+          <ul className="mx-auto grid max-w-5xl grid-cols-1 gap-7 sm:grid-cols-3 sm:gap-6 md:gap-8">
+            {fliser.map(({ tittel, beskrivelse, ikon: Ikon, href, accent }) => (
               <li key={tittel}>
                 <Link
                   href={href}
-                  className="group flex min-h-[9.5rem] flex-col items-center justify-center rounded-2xl border border-[#3A4D3A]/22 bg-[#FAF8F5] px-6 py-8 text-center shadow-sm transition-all duration-300 ease-out hover:border-[#3A4D3A] hover:bg-[#3A4D3A] hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3A4D3A] sm:min-h-[10rem]"
+                  className="group flex min-h-[18rem] flex-col items-center rounded-2xl border-2 border-[#2D362D] bg-[#FAF8F2] px-5 py-8 text-center shadow-[0_12px_40px_rgba(0,0,0,0.22)] transition-all duration-300 ease-out hover:border-[#2D362D] hover:bg-[#2D362D] hover:shadow-[0_18px_48px_rgba(0,0,0,0.35)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#2D362D] sm:min-h-[19rem] sm:px-6 sm:py-9"
+                  style={{ "--ikon-accent": accent } as CSSProperties}
                 >
                   <Ikon
-                    className="h-9 w-9 shrink-0 text-[#3A4D3A] transition-colors duration-300 group-hover:text-white sm:h-10 sm:w-10"
+                    size={64}
+                    className="shrink-0 text-[var(--ikon-accent)] transition-colors duration-300 group-hover:text-white"
                     strokeWidth={1.5}
                     aria-hidden
                   />
-                  <span className="mt-4 text-base font-semibold tracking-tight text-[#3A4D3A] transition-colors duration-300 group-hover:text-white sm:text-lg">
+                  <span className="mt-5 text-lg font-bold tracking-tight text-[#1A2419] transition-colors duration-300 group-hover:text-white">
                     {tittel}
                   </span>
-                  <span className="mt-1.5 text-sm text-[#2D332A]/88 transition-colors duration-300 group-hover:text-white/95">
+                  <span className="mt-3 max-w-[22rem] text-sm font-medium leading-relaxed text-[#1A2419] transition-colors duration-300 group-hover:text-white sm:max-w-none">
                     {beskrivelse}
                   </span>
                 </Link>
@@ -88,42 +98,47 @@ export default function Home() {
           </ul>
         </section>
 
-        {/* Historie */}
+        {/* Historie – statement */}
         <section
-          className="mt-16 overflow-hidden rounded-2xl border border-[#3A4D3A]/18 bg-[#FAF8F5] shadow-sm sm:mt-20 md:mt-24 lg:grid lg:grid-cols-2 lg:items-stretch"
+          className="mt-16 overflow-hidden rounded-2xl border-2 border-[#2D362D] bg-[#FAF8F2] shadow-[0_16px_48px_rgba(0,0,0,0.2)] sm:mt-20 md:mt-24 lg:grid lg:grid-cols-2 lg:items-stretch"
           aria-labelledby="historie-heading"
         >
-          <div className="p-7 text-center sm:p-9 md:p-11 lg:p-12 lg:text-left">
+          <div className="flex flex-col justify-center p-8 text-center sm:p-10 md:p-12 lg:p-14 lg:text-left">
+            <p className="font-sans text-xs font-bold uppercase tracking-[0.2em] text-[#2D362D]">
+              Historie
+            </p>
             <h2
               id="historie-heading"
-              className="font-display text-xl font-semibold tracking-tight text-[#3A4D3A] sm:text-2xl md:text-3xl"
+              className="mt-3 font-display text-2xl font-bold leading-tight tracking-tight text-[#1A2419] sm:text-3xl md:text-4xl"
             >
               Historien om Natlandsmyr
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-[#2D332A]/92 sm:text-base sm:leading-relaxed">
+            <p className="mt-8 text-base font-medium leading-relaxed text-[#1A2419] sm:text-lg sm:leading-relaxed">
               Gården ligger ved myren. Brukshistorien strekker seg over mange
               år – bygninger, generasjoner og hverdagen på tunet kan du kort
               beskrive her.
             </p>
-            <p className="mt-5 text-sm leading-relaxed text-[#2D332A]/92 sm:text-base sm:leading-relaxed">
-              Mer detaljer finner du på{" "}
+            <p className="mt-6 text-base font-medium leading-relaxed text-[#1A2419] sm:text-lg">
+              Les mer på{" "}
               <Link
                 href="/historie"
-                className="font-semibold text-[#3A4D3A] underline decoration-[#EADDC4] decoration-2 underline-offset-[3px] transition hover:text-[#2d3d2d] hover:decoration-[#3A4D3A]/50"
+                className="font-bold text-[#2D362D] underline decoration-[#2D362D] decoration-4 underline-offset-[5px] transition hover:text-[#1A2419] hover:decoration-[#1A2419]"
               >
                 historie-siden
               </Link>
               .
             </p>
           </div>
-          <div className="relative min-h-[240px] w-full border-t border-[#3A4D3A]/12 sm:min-h-[280px] lg:h-full lg:min-h-0 lg:border-l lg:border-t-0">
-            <Image
-              src="/images/emblem.jpg"
-              alt="Emblem for Natlandsmyren"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1023px) 100vw, 50vw"
-            />
+          <div className="flex min-h-[280px] w-full items-center justify-center border-t-2 border-[#2D362D] bg-[#F3EFE6] p-10 sm:min-h-[300px] sm:p-12 md:min-h-[320px] md:p-14 lg:min-h-full lg:border-l-2 lg:border-t-0">
+            <div className="relative aspect-square w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px]">
+              <Image
+                src="/images/emblem.jpg"
+                alt="Emblem for Natlandsmyren"
+                fill
+                className="object-contain object-center drop-shadow-[0_10px_28px_rgba(0,0,0,0.15)]"
+                sizes="(max-width: 1023px) 280px, 360px"
+              />
+            </div>
           </div>
         </section>
       </div>
