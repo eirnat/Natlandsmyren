@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import { FarmFooter } from "./components/FarmFooter";
-import { SiteTopBar } from "./components/SiteTopBar";
 import { GARD_NAVN } from "./lib/gard";
 import "./globals.css";
 
@@ -28,8 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="no" className={`${dmSans.variable} ${fraunces.variable}`}>
-      <body className="flex min-h-screen flex-col bg-[#F5E9D3] font-sans text-[#2D332A] antialiased">
-        <SiteTopBar />
+      <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
         <main className="flex-1">{children}</main>
         <FarmFooter />
       </body>

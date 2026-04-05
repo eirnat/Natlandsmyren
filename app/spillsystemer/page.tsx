@@ -110,15 +110,15 @@ function AccordionItem({
 }
 
 const btnPrimary =
-  "inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-terra px-8 py-3.5 text-sm font-semibold text-background shadow-sm transition-all duration-300 hover:bg-meadow hover:text-foreground hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-meadow focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-terra px-8 py-3.5 text-sm font-semibold text-background shadow-sm transition-all duration-300 hover:bg-moss hover:text-cream hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-50 disabled:pointer-events-none";
 
 const inputClass =
-  "w-full rounded-xl border border-foreground/15 bg-background px-4 py-3 text-base text-foreground shadow-sm transition-colors placeholder:text-foreground/40 focus:border-meadow focus:outline-none focus:ring-2 focus:ring-meadow/40";
+  "w-full rounded-xl border border-foreground/15 bg-background px-4 py-3 text-base text-foreground shadow-sm transition-colors placeholder:text-foreground/40 focus:border-moss focus:outline-none focus:ring-2 focus:ring-moss/40";
 
 const labelClass = "block text-sm font-semibold text-foreground mb-1.5";
 
 const selectChevronStyle = {
-  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232b2d42' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
+  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232d332a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
 } as const;
 
 function emptyPetanqueRow(): [string, string, string] {
@@ -224,7 +224,7 @@ export default function SpillsystemerPage() {
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full bg-terra px-4 py-2 text-sm font-semibold text-background transition-colors hover:bg-meadow hover:text-foreground"
+            className="inline-flex items-center gap-2 rounded-full bg-terra px-4 py-2 text-sm font-semibold text-background transition-colors hover:bg-moss hover:text-cream"
           >
             <ArrowLeft className="h-4 w-4" />
             Tilbake til forsiden
@@ -306,7 +306,7 @@ export default function SpillsystemerPage() {
                       onChange={(e) => setCrocketFullført(e.target.value)}
                       className={`${inputClass} appearance-none bg-[length:1rem] bg-[right_1rem_center] bg-no-repeat pr-10`}
                       style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232b2d42' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232d332a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
                       }}
                     >
                       <option value="">Velg …</option>
@@ -372,7 +372,7 @@ export default function SpillsystemerPage() {
                       onChange={(e) => setSjakkResultat(e.target.value)}
                       className={`${inputClass} appearance-none bg-[length:1rem] bg-[right_1rem_center] bg-no-repeat pr-10`}
                       style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232b2d42' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232d332a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
                       }}
                     >
                       <option value="">Velg resultat …</option>

@@ -8,13 +8,13 @@ export default function YmsePage() {
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full bg-terra px-4 py-2 text-sm font-semibold text-background transition-colors hover:bg-meadow hover:text-foreground"
+            className="inline-flex items-center gap-2 rounded-full bg-terra px-4 py-2 text-sm font-semibold text-background transition-colors hover:bg-moss hover:text-cream"
           >
             <ArrowLeft className="h-4 w-4" />
             Tilbake til forsiden
           </Link>
           <div className="hidden sm:flex items-center gap-2 text-sm text-foreground/70">
-            <FlaskConical className="h-4 w-4 text-terra" />
+            <FlaskConical className="h-4 w-4 text-moss" />
             Ymse prøving og feiling
           </div>
         </div>
@@ -29,7 +29,7 @@ export default function YmsePage() {
       </section>
 
       <section className="px-6 pb-20 md:pb-28">
-        <div className="max-w-4xl mx-auto rounded-[2rem] border border-foreground/10 bg-background shadow-sm p-8 md:p-12">
+        <div className="max-w-4xl mx-auto rounded-[2rem] border border-moss/12 bg-card shadow-sm p-8 md:p-12">
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-5">
             Eksperimenter og småprosjekter
           </h2>

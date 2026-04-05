@@ -324,7 +324,7 @@ export default function TrafikktellerPage() {
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full bg-terra px-4 py-2 text-sm font-semibold text-background transition-colors hover:bg-meadow hover:text-foreground"
+            className="inline-flex items-center gap-2 rounded-full bg-terra px-4 py-2 text-sm font-semibold text-background transition-colors hover:bg-moss hover:text-cream"
           >
             <ArrowLeft className="h-4 w-4" />
             Tilbake til forsiden
