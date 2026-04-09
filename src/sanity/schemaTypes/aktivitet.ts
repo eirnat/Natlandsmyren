@@ -17,7 +17,7 @@ export const aktivitet = defineType({
       title: "URL-adresse (slug)",
       type: "slug",
       description:
-        "Adressen på nettsiden, f.eks. «sau» gir natlandsmyren.no/aktivitet/sau. Genereres fra navn eller skrives inn.",
+        "Adressen på nettsiden, f.eks. «sau» gir natlandsmyren.no/sau. Genereres fra navn eller skrives inn.",
       options: {
         source: "tittel",
         maxLength: 96,
@@ -77,14 +77,15 @@ export const aktivitet = defineType({
       title: "Intern lenke (valgfri)",
       type: "string",
       description:
-        "Kun hvis du trenger en annen lenke enn /aktivitet/[slug] (f.eks. ekstern side). Tom = bruk slug.",
+        "Kun hvis du trenger en annen lenke enn /[slug] fra feltet over (f.eks. ekstern side). Tom = bruk slug.",
       placeholder: "/birøkt",
     }),
     defineField({
       name: "body",
-      title: "Brødtekst",
+      title: "Historie / brødtekst",
       type: "array",
-      description: "Lang tekst til aktivitetssiden – avsnitt og bilder.",
+      description:
+        "Historien om aktiviteten: overskrifter, tekst, lister, bilder (full bredde eller ved siden av tekst), og korte videosnutter lastet opp i Sanity (autoplay i loop).",
       of: [
         {
           type: "block",
@@ -114,8 +115,15 @@ export const aktivitet = defineType({
               type: "string",
               title: "Alternativ tekst",
             }),
+            defineField({
+              name: "caption",
+              type: "string",
+              title: "Bildetekst",
+            }),
           ],
         },
+        { type: "aktivitetStoryImage" },
+        { type: "aktivitetStoryVideo" },
       ],
     }),
     defineField({

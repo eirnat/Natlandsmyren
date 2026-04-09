@@ -55,6 +55,18 @@ export const aktivitetBySlugQuery = defineQuery(`
       alt
     },
     aksentfarge,
-    body
+    body[]{
+      ...,
+      _type == "aktivitetStoryVideo" => {
+        ...,
+        videoFile {
+          asset->{
+            url,
+            mimeType,
+            originalFilename
+          }
+        }
+      }
+    }
   }
 `);
