@@ -108,9 +108,20 @@ export default function Home() {
               Historien om Natlandsmyr
             </h2>
             <p className="mt-8 text-base font-medium leading-relaxed text-foreground sm:text-lg sm:leading-relaxed">
-              Gården ligger ved myren. Brukshistorien strekker seg over mange
-              år – bygninger, generasjoner og hverdagen på tunet kan du kort
-              beskrive her.
+              Gården Natlandsmyr var opprinnelig en husmannsplass under gården
+              Nedre Natland, og ble opprettet i ca. 1750.
+            </p>
+            <p className="mt-5 text-base font-medium leading-relaxed text-foreground sm:text-lg sm:leading-relaxed">
+              I 1751 ble plassen kalt Dalen. Navnet Myren har også vært benyttet
+              på plassen. Det sies at eierne av Nedre Natland anla bl.a.
+              husmannsplassene Natlandsmyr, Tøshaugen, Fagerbakken og Roligheten
+              i søre del av eiendommen for å hevde eiendomsgrensen mot Sandalen,
+              da her tidligere hadde vært uenighet om denne grensen.
+            </p>
+            <p className="mt-5 text-base font-medium leading-relaxed text-foreground sm:text-lg sm:leading-relaxed">
+              Natlandsmyr ble utskilt som eget bruk i 1841, og året etter, i 1842
+              ble gården kjøpt av Ole Monsen Skåldal, som er tipp, tipp oldefar
+              til dagens eier.
             </p>
             <p className="mt-6 text-base font-medium leading-relaxed text-foreground sm:text-lg">
               Les mer på{" "}
