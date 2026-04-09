@@ -40,6 +40,21 @@ export const aktiviteterQuery = defineQuery(`
   }
 `);
 
+/** De tre siste produktene (gårdsutsalg) til forsiden. */
+export const produkterHomeQuery = defineQuery(`
+  *[_type == "produkt"] | order(_createdAt desc) [0...3] {
+    _id,
+    tittel,
+    beskrivelse,
+    pris,
+    lagerstatus,
+    bilde {
+      asset,
+      alt
+    }
+  }
+`);
+
 export const aktivitetSlugsQuery = defineQuery(`
   *[_type == "aktivitet" && defined(slug.current)].slug.current
 `);

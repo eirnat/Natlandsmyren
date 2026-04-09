@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { PortableTextBlock } from "@portabletext/types";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
+import { ProductSection } from "./components/ProductSection";
 import type { AktivitetDoc, LandingDoc } from "../src/sanity/lib/home-data";
 import { getHomePageData } from "../src/sanity/lib/home-data";
 import { urlFor } from "../src/sanity/lib/image";
@@ -310,6 +311,8 @@ export default async function Home() {
             />
           </div>
         </section>
+
+        <ProductSection />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import {
   aktiviteterQuery,
   landingssideFallbackQuery,
   landingssideQuery,
+  produkterHomeQuery,
 } from "../queries";
 import { dataset, projectId } from "../env";
 import { sanityClient } from "./client";
@@ -23,6 +24,15 @@ export type AktivitetDoc = {
   internLenke?: string | null;
   ikon?: { asset?: { _ref?: string }; alt?: string | null } | null;
   aksentfarge?: string | null;
+};
+
+export type ProduktDoc = {
+  _id: string;
+  tittel: string;
+  beskrivelse: string;
+  pris: number;
+  lagerstatus: number;
+  bilde?: { asset?: { _ref?: string }; alt?: string | null } | null;
 };
 
 /**
@@ -53,4 +63,18 @@ export const getHomePageData = unstable_cache(
   fetchHomePageUncached,
   ["home-sanity", projectId, dataset],
   { revalidate: 60, tags: ["sanity:home"] },
+);
+
+async function fetchProdukterHomeUncached(): Promise<ProduktDoc[]> {
+  try {
+    return await sanityClient.fetch<ProduktDoc[]>(produkterHomeQuery);
+  } catch {
+    return [];
+  }
+}
+
+export const getGardsutsalgProdukter = unstable_cache(
+  fetchProdukterHomeUncached,
+  ["sanity-produkter", projectId, dataset],
+  { revalidate: 60, tags: ["sanity:produkter"] },
 );
