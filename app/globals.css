@@ -82,6 +82,18 @@ body {
   font-family: var(--font-dm-sans), system-ui, sans-serif;
 }
 
+/* Sanity Studio: nøytral bakgrunn, ikke oker eller støy-overlay */
+html[data-sanity-studio],
+html[data-sanity-studio] body,
+body[data-sanity-studio] {
+  background: #f2f2f4 !important;
+  color: #1a1a1a !important;
+}
+
+body[data-sanity-studio]::before {
+  opacity: 0 !important;
+}
+
 body::before {
   content: "";
   position: fixed;

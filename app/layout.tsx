@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
-import { FarmFooter } from "./components/FarmFooter";
+import { ConditionalFooter } from "./components/ConditionalFooter";
 import { GARD_NAVN } from "./lib/gard";
 import "./globals.css";
 
@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="no" className={`${dmSans.variable} ${fraunces.variable}`}>
       <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
         <main className="flex-1">{children}</main>
-        <FarmFooter />
+        <ConditionalFooter />
       </body>
     </html>
   );
