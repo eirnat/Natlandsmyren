@@ -81,6 +81,21 @@ export const aktivitetBySlugQuery = defineQuery(`
             originalFilename
           }
         }
+      },
+      _type == "productReference" => {
+        _key,
+        _type,
+        product->{
+          _id,
+          tittel,
+          beskrivelse,
+          pris,
+          lagerstatus,
+          bilde {
+            asset,
+            alt
+          }
+        }
       }
     }
   }

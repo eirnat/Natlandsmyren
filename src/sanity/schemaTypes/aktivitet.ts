@@ -85,7 +85,7 @@ export const aktivitet = defineType({
       title: "Historie / brødtekst",
       type: "array",
       description:
-        "Historien om aktiviteten: overskrifter, tekst, lister, bilder (full bredde eller ved siden av tekst), og korte videosnutter lastet opp i Sanity (autoplay i loop).",
+        "Historien om aktiviteten: overskrifter, tekst, lister, bilder, innebygde produkter fra gårdsutsalget, og korte videosnutter (autoplay i loop).",
       of: [
         {
           type: "block",
@@ -124,6 +124,7 @@ export const aktivitet = defineType({
         },
         { type: "aktivitetStoryImage" },
         { type: "aktivitetStoryVideo" },
+        { type: "productReference" },
       ],
     }),
     defineField({

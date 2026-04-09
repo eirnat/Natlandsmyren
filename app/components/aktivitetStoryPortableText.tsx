@@ -1,7 +1,9 @@
 import Image from "next/image";
 import type { PortableTextComponents } from "@portabletext/react";
 
+import { ProduktKort } from "./ProduktKort";
 import { resolveStoryVideoSrc } from "../lib/parse-video-embed";
+import type { ProduktDoc } from "../../src/sanity/lib/home-data";
 import { urlFor } from "../../src/sanity/lib/image";
 
 type StoryImageValue = {
@@ -14,6 +16,10 @@ type AktivitetStoryImageValue = {
   image?: StoryImageValue | null;
   caption?: string | null;
   layout?: "full" | "inline" | null;
+};
+
+type ProductReferenceValue = {
+  product?: ProduktDoc | null;
 };
 
 type AktivitetStoryVideoValue = {
@@ -207,5 +213,17 @@ export const aktivitetStoryPortableComponents: PortableTextComponents = {
     aktivitetStoryVideo: ({ value }) => (
       <VideoBlock value={value as AktivitetStoryVideoValue} />
     ),
+    productReference: ({ value }) => {
+      const p = (value as ProductReferenceValue)?.product;
+      if (!p?._id || !p.tittel) return null;
+      return (
+        <div className="my-10 w-full sm:my-14">
+          <ProduktKort
+            produkt={p}
+            sizes="(max-width: 896px) 100vw, 42rem"
+          />
+        </div>
+      );
+    },
   },
 };
