@@ -10,19 +10,19 @@ export const metadata: Metadata = {
 
 export default function SaueholdPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 text-foreground sm:px-5 md:px-6 md:py-12">
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-5 md:px-6 md:py-12">
       <Link
         href="/"
-        className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-moss-muted transition hover:text-moss md:mb-8"
+        className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-cream/90 transition hover:text-cream md:mb-8"
       >
         <ArrowLeft className="h-4 w-4" aria-hidden />
         Hjem
       </Link>
-      <article className="rounded-2xl border border-moss/12 bg-card p-6 shadow-sm sm:p-8 md:p-10">
-        <h1 className="font-display text-2xl font-semibold tracking-tight text-moss sm:text-3xl md:text-4xl">
+      <article className="farm-panel p-6 sm:p-8 md:p-10">
+        <h1 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
           Sauehold
         </h1>
-        <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
+        <p className="mt-4 text-sm font-medium leading-relaxed text-foreground sm:text-base">
           Her kan du skrive om sau på beite og det som hører til.
         </p>
       </article>
