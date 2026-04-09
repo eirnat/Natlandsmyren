@@ -39,3 +39,22 @@ export const aktiviteterQuery = defineQuery(`
     aksentfarge
   }
 `);
+
+export const aktivitetSlugsQuery = defineQuery(`
+  *[_type == "aktivitet" && defined(slug.current)].slug.current
+`);
+
+export const aktivitetBySlugQuery = defineQuery(`
+  *[_type == "aktivitet" && slug.current == $slug][0]{
+    _id,
+    tittel,
+    beskrivelse,
+    slug,
+    ikon {
+      asset,
+      alt
+    },
+    aksentfarge,
+    body
+  }
+`);

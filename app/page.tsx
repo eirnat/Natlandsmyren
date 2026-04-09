@@ -69,7 +69,7 @@ const FALLBACK_AKTIVITETER = [
       "Honning med karakter, hentet hjem fra kubene på Natlandsmyren.",
     figur: "/images/bie.svg",
     aksentfarge: "#D48420",
-    href: "/birøkt",
+    href: "/aktivitet/birokt",
   },
   {
     _id: "local-honsehold",
@@ -78,7 +78,7 @@ const FALLBACK_AKTIVITETER = [
       "Ferske gårdsegg fra hønene på tunet – hver dag, rett fra huset. Frittgående høner som trives ute.",
     figur: "/images/høne.svg",
     aksentfarge: "#A64B2A",
-    href: "/hønsehold",
+    href: "/aktivitet/honsehold",
   },
   {
     _id: "local-sauehold",
@@ -87,7 +87,7 @@ const FALLBACK_AKTIVITETER = [
       "Gammelnorsk spælsau – robuste sauer som kjenner myra og holder landskapet i form, beite for beite.",
     figur: "/images/sau.svg",
     aksentfarge: "#3E4A3E",
-    href: "/sauehold",
+    href: "/aktivitet/sau",
   },
 ] as const;
 
@@ -102,9 +102,9 @@ const historiePortableComponents: PortableTextComponents = {
 };
 
 function aktivitetHref(a: AktivitetDoc): string {
-  if (a.internLenke?.trim()) return a.internLenke.trim();
   const s = a.slug?.current?.trim();
-  if (s) return s.startsWith("/") ? s : `/${s}`;
+  if (s) return `/aktivitet/${s}`;
+  if (a.internLenke?.trim()) return a.internLenke.trim();
   return "#";
 }
 

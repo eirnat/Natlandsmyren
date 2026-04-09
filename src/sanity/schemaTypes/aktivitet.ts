@@ -13,6 +13,29 @@ export const aktivitet = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "slug",
+      title: "URL-adresse (slug)",
+      type: "slug",
+      description:
+        "Adressen på nettsiden, f.eks. «sau» gir natlandsmyren.no/aktivitet/sau. Genereres fra navn eller skrives inn.",
+      options: {
+        source: "tittel",
+        maxLength: 96,
+        slugify: (input) =>
+          input
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, "-")
+            .replace(/[æÆ]/g, "ae")
+            .replace(/[øØ]/g, "o")
+            .replace(/[åÅ]/g, "a")
+            .replace(/[^a-z0-9-]/g, "")
+            .replace(/-+/g, "-")
+            .replace(/^-|-$/g, ""),
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "beskrivelse",
       title: "Beskrivelse",
       type: "text",
@@ -51,19 +74,49 @@ export const aktivitet = defineType({
     }),
     defineField({
       name: "internLenke",
-      title: "Intern lenke",
+      title: "Intern lenke (valgfri)",
       type: "string",
-      description: "F.eks. /birøkt eller /hønsehold",
+      description:
+        "Kun hvis du trenger en annen lenke enn /aktivitet/[slug] (f.eks. ekstern side). Tom = bruk slug.",
       placeholder: "/birøkt",
     }),
     defineField({
-      name: "slug",
-      title: "Slug (valgfri reserve for lenke)",
-      type: "slug",
-      options: {
-        source: "tittel",
-        maxLength: 96,
-      },
+      name: "body",
+      title: "Brødtekst",
+      type: "array",
+      description: "Lang tekst til aktivitetssiden – avsnitt og bilder.",
+      of: [
+        {
+          type: "block",
+          styles: [
+            { title: "Normal", value: "normal" },
+            { title: "Overskrift 2", value: "h2" },
+            { title: "Overskrift 3", value: "h3" },
+          ],
+          lists: [
+            { title: "Punktliste", value: "bullet" },
+            { title: "Nummerert liste", value: "number" },
+          ],
+          marks: {
+            decorators: [
+              { title: "Fet", value: "strong" },
+              { title: "Kursiv", value: "em" },
+            ],
+            annotations: [],
+          },
+        },
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              type: "string",
+              title: "Alternativ tekst",
+            }),
+          ],
+        },
+      ],
     }),
     defineField({
       name: "rekkefolge",
