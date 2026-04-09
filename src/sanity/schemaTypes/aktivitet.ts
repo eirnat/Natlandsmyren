@@ -66,7 +66,7 @@ export const aktivitet = defineType({
       },
     }),
     defineField({
-      name: "rekkefølge",
+      name: "rekkefolge",
       title: "Rekkefølge",
       type: "number",
       description: "Lavere tall vises først.",
@@ -76,9 +76,9 @@ export const aktivitet = defineType({
   orderings: [
     {
       title: "Rekkefølge, deretter navn",
-      name: "rekkefølge",
+      name: "rekkefolge",
       by: [
-        { field: "rekkefølge", direction: "asc" },
+        { field: "rekkefolge", direction: "asc" },
         { field: "tittel", direction: "asc" },
       ],
     },

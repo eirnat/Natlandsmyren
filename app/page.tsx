@@ -129,7 +129,7 @@ function ikonUrl(a: AktivitetDoc): string | null {
 
 export default async function Home() {
   const { landing, aktiviteter: aktiviteterRaw } = await getHomePageData();
-  /** Maks tre kremfliser – samme rekkefølge som i Sanity (rekkefølge-felt). */
+  /** Maks tre kremfliser – samme rekkefølge som i Sanity (rekkefolge-felt). */
   const aktiviteter = aktiviteterRaw.slice(0, 3);
 
   const heroTittel = landing?.heroTittel?.trim() || DEFAULT_HERO_TITTEL;

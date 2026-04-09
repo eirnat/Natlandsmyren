@@ -26,7 +26,7 @@ export const landingssideFallbackQuery = defineQuery(`
 `);
 
 export const aktiviteterQuery = defineQuery(`
-  *[_type == "aktivitet"] | order(rekkefølge asc, tittel asc) {
+  *[_type == "aktivitet"] | order(rekkefolge asc, tittel asc) {
     _id,
     tittel,
     beskrivelse,
