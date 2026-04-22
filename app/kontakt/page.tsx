@@ -36,7 +36,7 @@ export default function KontaktPage() {
           </dl>
         </div>
         <div
-          className="farm-img flex min-h-[280px] items-center justify-center rounded-2xl border-2 border-moss bg-card p-8 text-center shadow-[0_12px_40px_rgba(0,0,0,0.22)] md:min-h-0"
+          className="farm-img flex min-h-[280px] items-center justify-center rounded-3xl border-2 border-black/10 bg-card p-8 text-center shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] md:min-h-0"
           role="img"
           aria-label="Plassholder for kart eller bilde"
         >

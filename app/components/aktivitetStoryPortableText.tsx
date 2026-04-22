@@ -61,7 +61,7 @@ function StoryFigureImage({
         alt={alt}
         width={isInline ? 800 : 1400}
         height={isInline ? 600 : 900}
-        className="w-full rounded-xl border-2 border-moss object-cover shadow-[0_10px_36px_rgba(45,54,45,0.18)]"
+        className="w-full rounded-3xl border-2 border-black/10 object-cover shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)]"
         sizes={
           isInline
             ? "(min-width: 768px) 47vw, 100vw"
@@ -102,7 +102,7 @@ function VideoBlock({ value }: { value: AktivitetStoryVideoValue }) {
           {caption}
         </figcaption>
       ) : null}
-      <div className="aspect-video overflow-hidden rounded-xl border-2 border-moss bg-black shadow-[0_12px_40px_rgba(45,54,45,0.2)]">
+      <div className="aspect-video overflow-hidden rounded-3xl border-2 border-black/10 bg-black shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)]">
         <video
           className="h-full w-full object-cover"
           src={src}

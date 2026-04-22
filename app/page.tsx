@@ -12,8 +12,8 @@ import { urlFor } from "../src/sanity/lib/image";
 export const revalidate = 60;
 
 const DEFAULT_HERO_TITTEL = "Velkommen til Natlandsmyren";
-const DEFAULT_HERO_SRC = "/images/gardvinter.jpg";
-const DEFAULT_HERO_ALT = "Natlandsmyren om vinteren";
+const DEFAULT_HERO_SRC = "/images/gardsommer.jpg";
+const DEFAULT_HERO_ALT = "Natlandsmyren om sommeren";
 
 const DEFAULT_HISTORIE_OVERSKRIFT = "Historien om Natlandsmyr";
 
@@ -105,7 +105,6 @@ const historiePortableComponents: PortableTextComponents = {
 function aktivitetHref(a: AktivitetDoc): string {
   const s = a.slug?.current?.trim();
   if (s) return `/${s}`;
-  if (a.internLenke?.trim()) return a.internLenke.trim();
   return "#";
 }
 
@@ -189,7 +188,7 @@ export default async function Home() {
         }));
 
   return (
-    <div className="min-h-screen bg-[#9B7039] text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <section className="w-full" aria-labelledby="hero-heading">
         <div className="relative aspect-[5/3] w-full min-h-[220px] sm:aspect-[2.2/1] sm:min-h-[260px] md:aspect-[2.6/1] md:min-h-[300px] lg:min-h-[340px]">
           <Image
@@ -207,7 +206,7 @@ export default async function Home() {
           <div className="absolute inset-0 z-[2] flex items-center justify-center px-5 sm:px-8 md:px-12 lg:px-16">
             <h1
               id="hero-heading"
-              className="max-w-5xl text-center font-sans text-[clamp(1.875rem,5.5vw+0.5rem,3rem)] font-black leading-[1.08] tracking-tight text-white antialiased drop-shadow-[0_4px_32px_rgba(0,0,0,0.75)] sm:text-[clamp(2.125rem,5vw+0.75rem,3.5rem)] md:text-[clamp(2.5rem,4vw+1rem,4rem)] lg:text-6xl lg:leading-[1.06] xl:text-7xl"
+              className="max-w-5xl text-center font-display text-[clamp(2.25rem,6vw+0.8rem,3.9rem)] font-black leading-[1.02] tracking-tight text-white antialiased drop-shadow-[0_7px_42px_rgba(0,0,0,0.9)] sm:text-[clamp(2.6rem,5.7vw+1rem,4.4rem)] md:text-[clamp(3.2rem,4.6vw+1.2rem,5.2rem)] lg:text-8xl lg:leading-[1.01]"
             >
               {heroTittel}
             </h1>
@@ -225,7 +224,7 @@ export default async function Home() {
               <li key={rad._id}>
                 <Link
                   href={rad.href}
-                  className="group flex min-h-[18rem] flex-col items-center rounded-2xl border-2 border-moss bg-card px-5 py-8 text-center shadow-[0_12px_40px_rgba(0,0,0,0.22)] transition-all duration-300 ease-out hover:border-moss hover:bg-moss hover:shadow-[0_18px_48px_rgba(0,0,0,0.35)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-moss sm:min-h-[19rem] sm:px-6 sm:py-9"
+                  className="group flex min-h-[18rem] flex-col items-center rounded-3xl border-2 border-black/10 bg-card px-5 py-8 text-center shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-moss hover:shadow-[8px_8px_0pt_0pt_rgba(0,0,0,0.14)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-moss sm:min-h-[19rem] sm:px-6 sm:py-9"
                   style={
                     {
                       "--flis-aksent": rad.aksentfarge,
@@ -271,7 +270,7 @@ export default async function Home() {
         </section>
 
         <section
-          className="mt-16 overflow-hidden rounded-2xl border-2 border-moss bg-card shadow-[0_16px_48px_rgba(0,0,0,0.2)] sm:mt-20 md:mt-24 lg:grid lg:grid-cols-2 lg:items-stretch"
+          className="mt-16 overflow-hidden rounded-3xl border-2 border-black/10 bg-card shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] sm:mt-20 md:mt-24 lg:grid lg:grid-cols-2 lg:items-stretch"
           aria-labelledby="historie-heading"
         >
           <div className="flex flex-col justify-center p-8 text-center sm:p-10 md:p-12 lg:p-14 lg:text-left">
@@ -280,7 +279,7 @@ export default async function Home() {
             </p>
             <h2
               id="historie-heading"
-              className="mt-3 font-display text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl md:text-4xl"
+              className="mt-3 font-display text-3xl font-black leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl"
             >
               {historieOverskrift}
             </h2>
@@ -301,7 +300,7 @@ export default async function Home() {
               .
             </p>
           </div>
-          <div className="relative min-h-[280px] w-full border-t-2 border-moss bg-cream-deep sm:min-h-[300px] md:min-h-[320px] lg:min-h-0 lg:h-full lg:border-l-2 lg:border-t-0">
+          <div className="relative min-h-[280px] w-full border-t-2 border-black/10 bg-cream-deep sm:min-h-[300px] md:min-h-[320px] lg:min-h-0 lg:h-full lg:border-l-2 lg:border-t-0">
             <Image
               src="/images/emblem.jpg"
               alt="Emblem for Natlandsmyren"

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Fraunces } from "next/font/google";
+import { DM_Sans, Playfair_Display } from "next/font/google";
 import { ConditionalFooter } from "./components/ConditionalFooter";
 import { GARD_NAVN } from "./lib/gard";
 import "./globals.css";
@@ -10,9 +10,10 @@ const dmSans = DM_Sans({
   weight: ["200", "300", "400", "500", "600", "700"],
 });
 
-const fraunces = Fraunces({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-playfair",
+  weight: ["600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="no" className={`${dmSans.variable} ${fraunces.variable}`}>
+    <html lang="no" className={`${dmSans.variable} ${playfair.variable}`}>
       <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
         <main className="flex-1">{children}</main>
         <ConditionalFooter />

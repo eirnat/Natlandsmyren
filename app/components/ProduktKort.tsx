@@ -44,7 +44,7 @@ export function ProduktKort({
 
   return (
     <div className={className}>
-      <article className="flex h-full flex-col overflow-hidden rounded-2xl border-2 border-moss bg-[#FAF8F2] shadow-[0_12px_40px_rgba(0,0,0,0.22)] transition-shadow duration-300 hover:shadow-[0_18px_48px_rgba(0,0,0,0.3)]">
+      <article className="flex h-full flex-col overflow-hidden rounded-3xl border-2 border-black/10 bg-card shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] transition-shadow duration-300 hover:shadow-[8px_8px_0pt_0pt_rgba(0,0,0,0.14)]">
         <div className="relative aspect-[4/3] w-full bg-cream-deep">
           {imgSrc ? (
             <Image
@@ -83,8 +83,8 @@ export function ProduktKort({
             type="button"
             className={
               utsolgt
-                ? "mt-5 w-full cursor-not-allowed rounded-xl border-2 border-moss/25 bg-moss/10 px-4 py-3 text-center text-sm font-bold text-moss/50"
-                : "mt-5 w-full rounded-xl border-2 border-[#c45c2a] bg-[#E85D2D] px-4 py-3 text-center text-sm font-bold text-white shadow-[0_6px_20px_rgba(232,93,45,0.35)] transition hover:border-[#a34a22] hover:bg-[#d45228] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-white"
+                ? "mt-5 w-full cursor-not-allowed rounded-3xl border-2 border-moss/25 bg-moss/10 px-4 py-3 text-center text-sm font-bold text-moss/50"
+                : "mt-5 w-full rounded-3xl border-2 border-[#c78912] bg-[#E9A825] px-4 py-3 text-center text-sm font-bold text-[#302208] shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.16)] transition hover:border-[#a86f0e] hover:bg-[#C88416] hover:text-white focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-white"
             }
             disabled={utsolgt}
             aria-disabled={utsolgt}

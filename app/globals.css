@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Forside-profil: mørk oker, kremfliser, mosegrønn ramme */
-  --farm-ochre: #9b7039;
+  /* Sommerprofil: lys krembakgrunn, frisk olivengrønn og varm historie-aksent */
+  --farm-ochre: #fffbf2;
   --farm-ink: #1a2419;
-  --farm-cream: #faf8f2;
-  --farm-mose: #2d362d;
-  --farm-panel: #f3efe6;
-  --farm-gull: #c98b3e;
+  --farm-cream: #fffbf2;
+  --farm-mose: #4b5b30;
+  --farm-panel: #f4f1ea;
+  --farm-gull: #e9a825;
+  --farm-gold-top: #f5d591;
+  --farm-border: rgba(0, 0, 0, 0.1);
+  --farm-history-accent: #8b4513;
 
   --myr-bg: var(--farm-ochre);
   --myr-ink: var(--farm-ink);
@@ -17,26 +20,26 @@
   --myr-gull: var(--farm-gull);
 
   --oatmeal: var(--farm-ochre);
-  --oatmeal-muted: #b8894a;
-  --oatmeal-deep: #7a5830;
+  --oatmeal-muted: #f3e5c6;
+  --oatmeal-deep: #d5bd8c;
   --moss: var(--farm-mose);
-  --moss-muted: #4a5246;
+  --moss-muted: #617146;
   --terra: var(--farm-gull);
-  --terra-light: #d4a04a;
+  --terra-light: #efbe53;
   --ochre: var(--farm-gull);
-  --ochre-soft: rgba(201, 139, 62, 0.35);
+  --ochre-soft: rgba(233, 168, 37, 0.22);
   --cream: var(--farm-cream);
-  --cream-muted: #ede8de;
+  --cream-muted: #f8f3e8;
   --cream-deep: var(--farm-panel);
   --ink: var(--farm-ink);
-  --ink-muted: rgba(26, 36, 25, 0.82);
+  --ink-muted: rgba(26, 36, 25, 0.84);
   --sage: var(--farm-mose);
-  --sage-dark: #1e241e;
-  --sage-light: #5a6358;
-  --sage-soft: rgba(45, 54, 45, 0.2);
+  --sage-dark: #354422;
+  --sage-light: #6c7c4f;
+  --sage-soft: rgba(75, 91, 48, 0.2);
   --honey: var(--farm-gull);
-  --honey-light: #d4a04a;
-  --honey-soft: rgba(201, 139, 62, 0.25);
+  --honey-light: #efbe53;
+  --honey-soft: rgba(233, 168, 37, 0.25);
 
   --background: var(--farm-ochre);
   --foreground: var(--farm-ink);
@@ -73,13 +76,26 @@
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --font-sans: var(--font-dm-sans);
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-playfair);
 }
 
 body {
-  background: var(--background);
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(245, 213, 145, 0.26) 0%,
+      rgba(245, 213, 145, 0.12) 20%,
+      rgba(255, 251, 242, 0) 46%
+    ),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-playfair), Georgia, serif;
 }
 
 /* Sanity Studio: nøytral bakgrunn, ikke oker eller støy-overlay */
@@ -99,22 +115,26 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.018;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: multiply;
   z-index: 9999;
 }
 
 .prose-farm img,
 .farm-img {
-  border-radius: 1.25rem;
+  border-radius: 1.5rem;
+  border: 2px solid rgb(0 0 0 / 0.1);
+  box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 /* Gjenbrukbar «flis» / panel som på forsiden */
 .farm-panel {
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   border-width: 2px;
   border-style: solid;
-  border-color: var(--farm-mose);
+  border-color: rgb(0 0 0 / 0.1);
   background-color: var(--farm-cream);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+  box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 0.1);
 }

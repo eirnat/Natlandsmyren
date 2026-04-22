@@ -90,7 +90,7 @@ export default async function AktivitetStoryPage({
     : undefined;
 
   return (
-    <div className="min-h-screen bg-[#9B7039] text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <section
         className="w-full"
         aria-labelledby="aktivitet-story-hero-heading"
@@ -121,7 +121,7 @@ export default async function AktivitetStoryPage({
             </Link>
             <h1
               id="aktivitet-story-hero-heading"
-              className="max-w-4xl text-center font-sans text-[clamp(1.875rem,5.5vw+0.5rem,3rem)] font-black leading-[1.08] tracking-tight text-white antialiased drop-shadow-[0_4px_32px_rgba(0,0,0,0.75)] sm:text-[clamp(2.125rem,5vw+0.75rem,3.5rem)] md:text-[clamp(2.5rem,4vw+1rem,4rem)] lg:text-6xl lg:leading-[1.06] xl:text-7xl"
+              className="max-w-4xl text-center font-display text-[clamp(2rem,5.8vw+0.65rem,3.5rem)] font-black leading-[1.04] tracking-tight text-white antialiased drop-shadow-[0_7px_42px_rgba(0,0,0,0.9)] sm:text-[clamp(2.35rem,5.1vw+0.9rem,4rem)] md:text-[clamp(2.8rem,4.2vw+1.1rem,4.6rem)] lg:text-7xl lg:leading-[1.02]"
             >
               {doc.tittel}
             </h1>
@@ -131,13 +131,13 @@ export default async function AktivitetStoryPage({
 
       <div className="mx-auto w-full max-w-4xl px-4 pb-24 pt-14 sm:px-6 sm:pb-28 sm:pt-16 md:px-8 md:pb-32 md:pt-20">
         <article
-          className="rounded-2xl border-2 border-moss bg-[#FAF8F2] px-7 py-10 shadow-[0_20px_56px_rgba(0,0,0,0.22)] sm:px-10 sm:py-12 md:px-14 md:py-14"
+          className="rounded-3xl border-2 border-black/10 bg-card px-7 py-10 shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] sm:px-10 sm:py-12 md:px-14 md:py-14"
           style={aksentStyle}
         >
           <p
             className="border-l-4 pl-5 text-lg font-medium leading-relaxed text-foreground sm:text-xl sm:leading-relaxed md:pl-6"
             style={{
-              borderColor: "var(--aktivitet-aksent, #2d362d)",
+              borderColor: "var(--aktivitet-aksent, #2d3a27)",
             }}
           >
             {doc.beskrivelse}
