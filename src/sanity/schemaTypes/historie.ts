@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const historie = defineType({
   name: "historie",
@@ -30,7 +30,7 @@ export const historie = defineType({
       title: "Fortelling (bilde + tekstblokker)",
       type: "array",
       of: [
-        defineType({
+        defineArrayMember({
           name: "historieFortellingBlokk",
           title: "Fortellingsblokk",
           type: "object",
@@ -115,7 +115,7 @@ export const historie = defineType({
       title: "Tidslinje",
       type: "array",
       of: [
-        defineType({
+        defineArrayMember({
           name: "historieTidslinjePunkt",
           title: "Tidslinjepunkt",
           type: "object",
