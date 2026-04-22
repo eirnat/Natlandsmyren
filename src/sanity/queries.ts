@@ -100,3 +100,63 @@ export const aktivitetBySlugQuery = defineQuery(`
     }
   }
 `);
+
+export const historieQuery = defineQuery(`
+  *[_type == "historie" && _id == "historie"][0]{
+    tittel,
+    heroBilde {
+      asset,
+      alt
+    },
+    fortelling[]{
+      _key,
+      layout,
+      bilde {
+        asset,
+        alt,
+        caption
+      },
+      tekst
+    },
+    tidslinje[]{
+      _key,
+      aarstall,
+      hendelseTittel,
+      beskrivelse,
+      bilde {
+        asset,
+        alt
+      }
+    }
+  }
+`);
+
+export const historieFallbackQuery = defineQuery(`
+  *[_type == "historie"][0]{
+    tittel,
+    heroBilde {
+      asset,
+      alt
+    },
+    fortelling[]{
+      _key,
+      layout,
+      bilde {
+        asset,
+        alt,
+        caption
+      },
+      tekst
+    },
+    tidslinje[]{
+      _key,
+      aarstall,
+      hendelseTittel,
+      beskrivelse,
+      bilde {
+        asset,
+        alt
+      }
+    }
+  }
+`);

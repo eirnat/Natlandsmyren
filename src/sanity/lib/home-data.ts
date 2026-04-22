@@ -2,6 +2,8 @@ import { unstable_cache } from "next/cache";
 import type { PortableTextBlock } from "@portabletext/types";
 import {
   aktiviteterQuery,
+  historieFallbackQuery,
+  historieQuery,
   landingssideFallbackQuery,
   landingssideQuery,
   produkterHomeQuery,
@@ -34,6 +36,32 @@ export type ProduktDoc = {
   lagerstatus: number;
   bilde?: { asset?: { _ref?: string }; alt?: string | null } | null;
 };
+
+export type HistorieTidslinjePunkt = {
+  _key?: string;
+  aarstall?: string | null;
+  hendelseTittel?: string | null;
+  beskrivelse?: string | null;
+  bilde?: { asset?: { _ref?: string }; alt?: string | null } | null;
+};
+
+export type HistorieFortellingBlokk = {
+  _key?: string;
+  layout?: "left" | "right" | "full" | null;
+  bilde?: {
+    asset?: { _ref?: string };
+    alt?: string | null;
+    caption?: string | null;
+  } | null;
+  tekst?: PortableTextBlock[] | null;
+};
+
+export type HistorieDoc = {
+  tittel?: string | null;
+  heroBilde?: { asset?: { _ref?: string }; alt?: string | null } | null;
+  fortelling?: HistorieFortellingBlokk[] | null;
+  tidslinje?: HistorieTidslinjePunkt[] | null;
+} | null;
 
 /**
  * Henter landingsside + aktiviteter. Cache invalideres maks hvert 60. sekund (ISR),
@@ -77,4 +105,21 @@ export const getGardsutsalgProdukter = unstable_cache(
   fetchProdukterHomeUncached,
   ["sanity-produkter", projectId, dataset],
   { revalidate: 60, tags: ["sanity:produkter"] },
+);
+
+async function fetchHistorieUncached(): Promise<HistorieDoc> {
+  try {
+    return (
+      (await sanityClient.fetch<HistorieDoc>(historieQuery)) ??
+      (await sanityClient.fetch<HistorieDoc>(historieFallbackQuery))
+    );
+  } catch {
+    return null;
+  }
+}
+
+export const getHistorieData = unstable_cache(
+  fetchHistorieUncached,
+  ["sanity-historie", projectId, dataset],
+  { revalidate: 60, tags: ["sanity:historie"] },
 );

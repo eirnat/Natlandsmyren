@@ -79,7 +79,7 @@ const FALLBACK_AKTIVITETER = [
       "Ferske gårdsegg fra hønene på tunet – hver dag, rett fra huset. Frittgående høner som trives ute.",
     figur: "/images/høne.svg",
     aksentfarge: "#A64B2A",
-    href: "/honsehold",
+    href: "/hoensehold",
   },
   {
     _id: "local-sauehold",
@@ -108,6 +108,19 @@ function aktivitetHref(a: AktivitetDoc): string {
   return "#";
 }
 
+function finnAktivitetForForside(
+  aktiviteter: AktivitetDoc[],
+  slugKandidater: readonly string[],
+): AktivitetDoc | null {
+  const kandidatSett = new Set(slugKandidater.map((s) => s.toLowerCase()));
+  return (
+    aktiviteter.find((a) => {
+      const slug = a.slug?.current?.trim().toLowerCase();
+      return slug ? kandidatSett.has(slug) : false;
+    }) ?? null
+  );
+}
+
 function heroImageUrl(landing: LandingDoc): string {
   const ref = landing?.heroBilde?.asset?._ref;
   if (!ref) return DEFAULT_HERO_SRC;
@@ -121,7 +134,7 @@ function heroImageUrl(landing: LandingDoc): string {
 function ikonUrl(a: AktivitetDoc): string | null {
   if (!a.ikon?.asset?._ref) return null;
   try {
-    return urlFor(a.ikon).width(128).height(128).fit("max").url();
+    return urlFor(a.ikon).quality(90).auto("format").url();
   } catch {
     return null;
   }
@@ -129,8 +142,12 @@ function ikonUrl(a: AktivitetDoc): string | null {
 
 export default async function Home() {
   const { landing, aktiviteter: aktiviteterRaw } = await getHomePageData();
-  /** Maks tre kremfliser – samme rekkefølge som i Sanity (rekkefolge-felt). */
-  const aktiviteter = aktiviteterRaw.slice(0, 3);
+  const biroktData = finnAktivitetForForside(aktiviteterRaw, ["birokt"]);
+  const honseholdData = finnAktivitetForForside(aktiviteterRaw, [
+    "hoensehold",
+    "honsehold",
+  ]);
+  const saueholdData = finnAktivitetForForside(aktiviteterRaw, ["sau"]);
 
   const heroTittel = landing?.heroTittel?.trim() || DEFAULT_HERO_TITTEL;
   const heroSrc = heroImageUrl(landing);
@@ -165,27 +182,68 @@ export default async function Home() {
         ikonAlt: string;
       };
 
-  const aktivitetRader: AktivitetRad[] =
-    aktiviteter.length > 0
-      ? aktiviteter.map((a) => ({
-          _id: a._id,
-          tittel: a.tittel,
-          beskrivelse: a.beskrivelse,
-          href: aktivitetHref(a),
-          aksentfarge: a.aksentfarge?.trim() || "#D48420",
-          sanityIkonUrl: ikonUrl(a),
-          ikonAlt: a.ikon?.alt?.trim() || "",
-        }))
-      : FALLBACK_AKTIVITETER.map((x) => ({
-          _id: x._id,
-          tittel: x.tittel,
-          beskrivelse: x.beskrivelse,
-          href: x.href,
-          aksentfarge: x.aksentfarge,
+  const aktivitetRader: AktivitetRad[] = [
+    biroktData
+      ? {
+          _id: biroktData._id,
+          tittel: biroktData.tittel,
+          beskrivelse: biroktData.beskrivelse,
+          href: aktivitetHref(biroktData),
+          aksentfarge: biroktData.aksentfarge?.trim() || "#D48420",
+          sanityIkonUrl: ikonUrl(biroktData),
+          ikonAlt: biroktData.ikon?.alt?.trim() || "",
+        }
+      : {
+          _id: FALLBACK_AKTIVITETER[0]._id,
+          tittel: FALLBACK_AKTIVITETER[0].tittel,
+          beskrivelse: FALLBACK_AKTIVITETER[0].beskrivelse,
+          href: FALLBACK_AKTIVITETER[0].href,
+          aksentfarge: FALLBACK_AKTIVITETER[0].aksentfarge,
           sanityIkonUrl: null,
-          figur: x.figur,
+          figur: FALLBACK_AKTIVITETER[0].figur,
           ikonAlt: "",
-        }));
+        },
+    honseholdData
+      ? {
+          _id: honseholdData._id,
+          tittel: honseholdData.tittel,
+          beskrivelse: honseholdData.beskrivelse,
+          href: aktivitetHref(honseholdData),
+          aksentfarge: honseholdData.aksentfarge?.trim() || "#A64B2A",
+          sanityIkonUrl: ikonUrl(honseholdData),
+          ikonAlt: honseholdData.ikon?.alt?.trim() || "",
+        }
+      : {
+          _id: FALLBACK_AKTIVITETER[1]._id,
+          tittel: FALLBACK_AKTIVITETER[1].tittel,
+          beskrivelse: FALLBACK_AKTIVITETER[1].beskrivelse,
+          href: FALLBACK_AKTIVITETER[1].href,
+          aksentfarge: FALLBACK_AKTIVITETER[1].aksentfarge,
+          sanityIkonUrl: null,
+          figur: FALLBACK_AKTIVITETER[1].figur,
+          ikonAlt: "",
+        },
+    saueholdData
+      ? {
+          _id: saueholdData._id,
+          tittel: saueholdData.tittel,
+          beskrivelse: saueholdData.beskrivelse,
+          href: aktivitetHref(saueholdData),
+          aksentfarge: saueholdData.aksentfarge?.trim() || "#3E4A3E",
+          sanityIkonUrl: ikonUrl(saueholdData),
+          ikonAlt: saueholdData.ikon?.alt?.trim() || "",
+        }
+      : {
+          _id: FALLBACK_AKTIVITETER[2]._id,
+          tittel: FALLBACK_AKTIVITETER[2].tittel,
+          beskrivelse: FALLBACK_AKTIVITETER[2].beskrivelse,
+          href: FALLBACK_AKTIVITETER[2].href,
+          aksentfarge: FALLBACK_AKTIVITETER[2].aksentfarge,
+          sanityIkonUrl: null,
+          figur: FALLBACK_AKTIVITETER[2].figur,
+          ikonAlt: "",
+        },
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -220,52 +278,61 @@ export default async function Home() {
             Aktiviteter på gården
           </h2>
           <ul className="mx-auto grid max-w-5xl grid-cols-1 gap-7 sm:grid-cols-3 sm:gap-6 md:gap-8">
-            {aktivitetRader.map((rad) => (
-              <li key={rad._id}>
-                <Link
-                  href={rad.href}
-                  className="group flex min-h-[18rem] flex-col items-center rounded-3xl border-2 border-black/10 bg-card px-5 py-8 text-center shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-moss hover:shadow-[8px_8px_0pt_0pt_rgba(0,0,0,0.14)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-moss sm:min-h-[19rem] sm:px-6 sm:py-9"
-                  style={
-                    {
-                      "--flis-aksent": rad.aksentfarge,
-                    } as CSSProperties
-                  }
-                >
-                  <div className="relative flex h-16 w-16 shrink-0 items-center justify-center">
-                    <span
-                      className="absolute h-[3.25rem] w-[3.25rem] rounded-full opacity-25"
-                      style={{ backgroundColor: "var(--flis-aksent)" }}
+            {aktivitetRader.map((rad, index) => {
+              const bakgrunnBilde = rad.sanityIkonUrl ?? rad.figur ?? null;
+              return (
+                <li key={rad._id}>
+                  <Link
+                    href={rad.href}
+                    className="group relative flex min-h-[18rem] overflow-hidden rounded-3xl border-2 border-black/5 bg-card text-center shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] transition-all duration-500 ease-in-out hover:-translate-y-0.5 hover:shadow-[8px_8px_0pt_0pt_rgba(0,0,0,0.14)] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-moss sm:min-h-[19rem]"
+                    style={
+                      {
+                        "--flis-aksent": rad.aksentfarge,
+                      } as CSSProperties
+                    }
+                  >
+                    <div className="absolute inset-0" aria-hidden>
+                      {bakgrunnBilde ? (
+                        <Image
+                          src={bakgrunnBilde}
+                          alt=""
+                          fill
+                          className="object-cover object-center"
+                          priority={index < 3}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="h-full w-full bg-[var(--flis-aksent)]/30" />
+                      )}
+                    </div>
+                    <div
+                      className="absolute inset-0 z-[1] bg-[#FFFBF2]/88 transition-all duration-500 ease-in-out group-hover:opacity-0"
                       aria-hidden
                     />
-                    {rad.sanityIkonUrl ? (
-                      <Image
-                        src={rad.sanityIkonUrl}
-                        alt={rad.ikonAlt || ""}
-                        width={64}
-                        height={64}
-                        className="relative z-[1] h-16 w-16 object-contain"
-                        sizes="64px"
-                      />
-                    ) : rad.figur ? (
-                      <Image
-                        src={rad.figur}
-                        alt=""
-                        width={64}
-                        height={64}
-                        className="relative z-[1] h-16 w-16 object-contain"
-                        aria-hidden
-                      />
-                    ) : null}
-                  </div>
-                  <span className="mt-5 text-lg font-bold tracking-tight text-foreground transition-colors duration-300 group-hover:text-white">
-                    {rad.tittel}
-                  </span>
-                  <span className="mt-3 max-w-[22rem] text-sm font-medium leading-relaxed text-foreground transition-colors duration-300 group-hover:text-white sm:max-w-none">
-                    {rad.beskrivelse}
-                  </span>
-                </Link>
-              </li>
-            ))}
+                    <div className="relative z-[2] flex w-full flex-col items-center justify-center px-6 py-10 sm:px-8 sm:py-11">
+                      <span
+                        className="text-3xl font-bold tracking-tight text-[#2D3A27] sm:text-4xl"
+                        style={{
+                          textShadow:
+                            "0 0 10px rgba(255,255,255,0.9), 0 0 5px rgba(255,255,255,0.9)",
+                        }}
+                      >
+                        {rad.tittel}
+                      </span>
+                      <span
+                        className="mt-3 text-base font-bold leading-relaxed text-[#2D3A27] sm:text-lg"
+                        style={{
+                          textShadow:
+                            "0 0 10px rgba(255,255,255,0.9), 0 0 5px rgba(255,255,255,0.9)",
+                        }}
+                      >
+                        {rad.beskrivelse}
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </section>
 

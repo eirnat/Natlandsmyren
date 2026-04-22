@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
 import { ConditionalFooter } from "./components/ConditionalFooter";
-import { GARD_NAVN } from "./lib/gard";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -17,8 +16,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: `${GARD_NAVN} – hobbygård`,
-  description: `Velkommen til ${GARD_NAVN} – et sted for tradisjon og glede.`,
+  title: "Velkommen til Natlandsmyren",
+  description:
+    "Opplev livet på Natlandsmyren – Birøkt, sauehold og lokalproduserte varer.",
 };
 
 export default function RootLayout({

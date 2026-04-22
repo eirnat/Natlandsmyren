@@ -32,8 +32,15 @@ export default defineConfig({
                   .schemaType("landingsside")
                   .documentId("landingsside"),
               ),
+            S.listItem()
+              .title("Historie")
+              .id("historie-entry")
+              .child(
+                S.document().schemaType("historie").documentId("historie"),
+              ),
             ...S.documentTypeListItems().filter(
-              (item) => item.getId() !== "landingsside",
+              (item) =>
+                item.getId() !== "landingsside" && item.getId() !== "historie",
             ),
           ]),
     }),
