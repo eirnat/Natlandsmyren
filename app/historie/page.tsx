@@ -228,7 +228,7 @@ export default async function HistoriePage() {
 
         <div className="mt-14 space-y-10 sm:space-y-14">
           {fortelling.map((blokk, index) => {
-            const layout = blokk.layout || "left";
+            const isOdd = index % 2 === 1;
             const bildeUrl = fortellingImageUrl(blokk.bilde);
             const bildeAlt = blokk.bilde?.alt?.trim() || `${tittel} – bilde`;
             const caption = blokk.bilde?.caption?.trim();
@@ -262,22 +262,16 @@ export default async function HistoriePage() {
               </div>
             );
 
-            const content =
-              layout === "full" ? (
-                <div className="space-y-5">
-                  {imagePanel}
-                  {textPanel}
-                </div>
-              ) : (
-                <div className="grid gap-6 md:grid-cols-2 md:gap-8">
-                  <div className={layout === "right" ? "md:order-2" : ""}>
-                    {imagePanel}
-                  </div>
-                  <div className={layout === "right" ? "md:order-1" : ""}>
-                    {textPanel}
-                  </div>
-                </div>
-              );
+            const content = (
+              <div
+                className={`flex flex-col gap-6 md:items-stretch md:gap-8 ${
+                  isOdd ? "md:flex-row-reverse" : "md:flex-row"
+                }`}
+              >
+                <div className="md:w-1/2">{imagePanel}</div>
+                <div className="md:w-1/2">{textPanel}</div>
+              </div>
+            );
 
             return (
               <FadeInOnScroll
@@ -331,14 +325,14 @@ export default async function HistoriePage() {
                       {beskrivelse}
                     </p>
                     {bildeUrl ? (
-                      <div className="relative mt-6 overflow-hidden rounded-3xl border-2 border-white bg-[#ede3cf] p-2 shadow-[0_6px_18px_rgba(0,0,0,0.12)]">
+                      <div className="relative mt-6 w-24 max-w-[150px] overflow-hidden rounded-3xl border-2 border-white bg-[#ede3cf] p-2 shadow-[0_6px_18px_rgba(0,0,0,0.12)] sm:w-32 md:w-36">
                         <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                           <Image
                             src={bildeUrl}
                             alt={punkt.bilde?.alt?.trim() || hendelseTittel}
                             fill
                             className="object-cover object-center"
-                            sizes="(max-width: 1024px) 100vw, 720px"
+                            sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 144px"
                           />
                         </div>
                       </div>
