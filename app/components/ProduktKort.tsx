@@ -37,10 +37,10 @@ export function ProduktKort({
   const p = produkt;
   const imgSrc = produktBildeUrl(p.bilde);
   const alt = p.bilde?.alt?.trim() || p.tittel;
-  const utsolgt = (p.lagerstatus ?? 0) <= 0;
+  const utsolgt = p.lagerstatus === 0;
   const pris = p.pris ?? 0;
   const beskrivelse = p.beskrivelse ?? "";
-  const lager = p.lagerstatus ?? 0;
+  const lager = p.lagerstatus;
 
   return (
     <div className={className}>
@@ -77,7 +77,11 @@ export function ProduktKort({
                 : "mt-2 text-xs font-semibold text-moss/80"
             }
           >
-            {utsolgt ? "Utsolgt" : `${lager} på lager`}
+            {utsolgt
+              ? "Utsolgt"
+              : typeof lager === "number" && lager > 0
+                ? `${lager} på lager`
+                : "På lager"}
           </p>
           <button
             type="button"

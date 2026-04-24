@@ -33,7 +33,7 @@ export type ProduktDoc = {
   tittel: string;
   beskrivelse: string;
   pris: number;
-  lagerstatus: number;
+  lagerstatus?: number | null;
   bilde?: { asset?: { _ref?: string }; alt?: string | null } | null;
 };
 
