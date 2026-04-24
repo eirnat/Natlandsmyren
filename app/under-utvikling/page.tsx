@@ -29,8 +29,7 @@ export default function UnderUtviklingPage() {
             Velkommen til Natlandsmyren
           </h1>
           <p className="mt-5 text-lg font-medium leading-relaxed text-[#2D3A27] sm:text-xl">
-            Nettsiden vår er for tiden under utvikling for å gi deg en bedre
-            opplevelse. Vi gleder oss til å vise deg resultatet snart!
+            Nettsiden vår er for tiden under utvikling.
           </p>
         </div>
       </div>
