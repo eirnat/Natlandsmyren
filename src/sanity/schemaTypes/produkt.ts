@@ -46,7 +46,6 @@ export const produkt = defineType({
       type: "number",
       description: "Antall på lager. Bruk 0 hvis utsolgt.",
       initialValue: 0,
-      validation: (Rule) => Rule.required().integer().min(0),
     }),
   ],
   orderings: [
