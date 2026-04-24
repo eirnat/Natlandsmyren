@@ -314,25 +314,27 @@ export default async function HistoriePage() {
                     className="absolute left-[-2.1rem] top-2 h-4 w-4 rounded-full border-2 border-[#8B4513]/70 bg-[#F4F1EA] sm:left-[-2.73rem]"
                     aria-hidden
                   />
-                  <div className="rounded-3xl border-2 border-black/10 bg-[#FFFBF2] p-5 shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] sm:p-6">
-                    <p className="font-sans text-[0.68rem] font-black uppercase tracking-[0.2em] text-[#8B4513] sm:text-xs">
-                      {aarstall}
-                    </p>
-                    <h3 className="mt-2 font-display text-xl font-black leading-tight text-[#8B4513] sm:text-2xl">
-                      {hendelseTittel}
-                    </h3>
-                    <p className="mt-3 text-sm font-medium leading-relaxed text-[#2D3A27] sm:text-base">
-                      {beskrivelse}
-                    </p>
+                  <div className="flex flex-col gap-6 rounded-3xl border-2 border-black/10 bg-[#FFFBF2] p-5 shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] sm:flex-row sm:items-start sm:gap-8 sm:p-6">
+                    <div className="flex-grow">
+                      <p className="font-sans text-[0.68rem] font-black uppercase tracking-[0.2em] text-[#8B4513] sm:text-xs">
+                        {aarstall}
+                      </p>
+                      <h3 className="mt-2 font-display text-xl font-black leading-tight text-[#8B4513] sm:text-2xl">
+                        {hendelseTittel}
+                      </h3>
+                      <p className="mt-3 text-sm font-medium leading-relaxed text-[#2D3A27] sm:text-base">
+                        {beskrivelse}
+                      </p>
+                    </div>
                     {bildeUrl ? (
-                      <div className="relative mt-6 w-24 max-w-[150px] overflow-hidden rounded-3xl border-2 border-white bg-[#ede3cf] p-2 shadow-[0_6px_18px_rgba(0,0,0,0.12)] sm:w-32 md:w-36">
+                      <div className="relative w-32 max-w-[150px] flex-shrink-0 overflow-hidden rounded-3xl border-2 border-white bg-[#ede3cf] p-2 shadow-[0_6px_18px_rgba(0,0,0,0.12)] sm:w-36 md:w-40">
                         <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                           <Image
                             src={bildeUrl}
                             alt={punkt.bilde?.alt?.trim() || hendelseTittel}
                             fill
                             className="object-cover object-center"
-                            sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 144px"
+                            sizes="(max-width: 640px) 128px, (max-width: 768px) 144px, 160px"
                           />
                         </div>
                       </div>
