@@ -8,16 +8,16 @@ export async function ProductSection() {
 
   return (
     <section
-      className="mt-16 sm:mt-20 md:mt-24"
+      className="mt-[var(--space-5)]"
       aria-labelledby="gardsutsalg-heading"
     >
       <h2
         id="gardsutsalg-heading"
-        className="mb-10 text-center font-display text-4xl font-black leading-tight tracking-tight text-moss antialiased sm:mb-12 sm:text-5xl md:text-6xl"
+        className="mb-[var(--space-3)] text-center font-display text-section font-semibold text-foreground"
       >
         Fra Gårdsutsalget
       </h2>
-      <ul className="mx-auto grid max-w-5xl grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:gap-8">
+      <ul className="mx-auto grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
         {synligeProdukter.map((p) => (
           <li key={p._id}>
             <ProduktKort produkt={p} />

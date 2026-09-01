@@ -1,4 +1,3 @@
-import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./src/sanity/schemaTypes";
@@ -44,7 +43,6 @@ export default defineConfig({
             ),
           ]),
     }),
-    visionTool({ defaultApiVersion: "2024-01-01" }),
   ],
   schema: {
     types: schemaTypes,

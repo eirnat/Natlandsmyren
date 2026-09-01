@@ -1,51 +1,75 @@
 @import "tailwindcss";
 
 :root {
-  /* Sommerprofil: lys krembakgrunn, frisk olivengrønn og varm historie-aksent */
-  --farm-ochre: #fffbf2;
-  --farm-ink: #1a2419;
-  --farm-cream: #fffbf2;
-  --farm-mose: #4b5b30;
-  --farm-panel: #f4f1ea;
-  --farm-gull: #e9a825;
-  --farm-gold-top: #f5d591;
-  --farm-border: rgba(0, 0, 0, 0.1);
-  --farm-history-accent: #8b4513;
+  /* Designmanual — Natlandsmyren */
+  --color-havre: #f2ecdc;
+  --color-tjaresvart: #2b211a;
+  --color-myrbrun: #7a4e33;
+  --color-mosegronn: #6e7b52;
+  --color-kveldsgull: #c1903f;
+  --color-takegraa: #d7d0bf;
 
-  --myr-bg: var(--farm-ochre);
-  --myr-ink: var(--farm-ink);
-  --myr-moss: var(--farm-mose);
-  --myr-cream: var(--farm-cream);
+  --farm-ochre: var(--color-havre);
+  --farm-ink: var(--color-tjaresvart);
+  --farm-cream: var(--color-havre);
+  --farm-mose: var(--color-mosegronn);
+  --farm-panel: #ebe4d4;
+  --farm-gull: var(--color-kveldsgull);
+  --farm-border: var(--color-takegraa);
+  --farm-history-accent: var(--color-myrbrun);
+
+  --myr-bg: var(--color-havre);
+  --myr-ink: var(--color-tjaresvart);
+  --myr-moss: var(--color-mosegronn);
+  --myr-cream: var(--color-havre);
   --myr-oker: var(--farm-panel);
-  --myr-gull: var(--farm-gull);
+  --myr-gull: var(--color-kveldsgull);
 
-  --oatmeal: var(--farm-ochre);
-  --oatmeal-muted: #f3e5c6;
-  --oatmeal-deep: #d5bd8c;
-  --moss: var(--farm-mose);
-  --moss-muted: #617146;
-  --terra: var(--farm-gull);
-  --terra-light: #efbe53;
-  --ochre: var(--farm-gull);
-  --ochre-soft: rgba(233, 168, 37, 0.22);
-  --cream: var(--farm-cream);
-  --cream-muted: #f8f3e8;
+  --oatmeal: var(--color-havre);
+  --oatmeal-muted: #e8e0ce;
+  --oatmeal-deep: var(--color-takegraa);
+  --moss: var(--color-mosegronn);
+  --moss-muted: #5a6645;
+  --myrbrun: var(--color-myrbrun);
+  --terra: var(--color-myrbrun);
+  --terra-light: #8f6245;
+  --ochre: var(--color-kveldsgull);
+  --ochre-soft: rgba(193, 144, 63, 0.18);
+  --cream: var(--color-havre);
+  --cream-muted: #ebe4d4;
   --cream-deep: var(--farm-panel);
-  --ink: var(--farm-ink);
-  --ink-muted: rgba(26, 36, 25, 0.84);
-  --sage: var(--farm-mose);
-  --sage-dark: #354422;
-  --sage-light: #6c7c4f;
-  --sage-soft: rgba(75, 91, 48, 0.2);
-  --honey: var(--farm-gull);
-  --honey-light: #efbe53;
-  --honey-soft: rgba(233, 168, 37, 0.25);
+  --ink: var(--color-tjaresvart);
+  --ink-muted: rgba(43, 33, 26, 0.78);
+  --sage: var(--color-mosegronn);
+  --sage-dark: #4d5839;
+  --sage-light: #8a9668;
+  --sage-soft: rgba(110, 123, 82, 0.18);
+  --honey: var(--color-kveldsgull);
+  --honey-light: #d4a85a;
+  --honey-soft: rgba(193, 144, 63, 0.2);
+  --kveldsgull: var(--color-kveldsgull);
 
-  --background: var(--farm-ochre);
-  --foreground: var(--farm-ink);
-  --card: var(--farm-cream);
-  --muted-foreground: rgba(26, 36, 25, 0.78);
-  --meadow: var(--farm-mose);
+  --background: var(--color-havre);
+  --foreground: var(--color-tjaresvart);
+  --card: var(--color-havre);
+  --muted-foreground: rgba(43, 33, 26, 0.72);
+  --meadow: var(--color-mosegronn);
+
+  /* Spacing-skala */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6rem;
+
+  /* Typografisk skala */
+  --text-hero: clamp(2.5rem, 5vw, 3rem);
+  --text-section: clamp(1.75rem, 2.5vw, 2rem);
+  --text-card-title: clamp(1.25rem, 1.5vw, 1.375rem);
+  --text-body: 1.0625rem;
+  --text-lead: 1.125rem;
+  --text-small: 0.875rem;
 }
 
 @theme inline {
@@ -59,6 +83,7 @@
   --color-oatmeal-deep: var(--oatmeal-deep);
   --color-moss: var(--moss);
   --color-moss-muted: var(--moss-muted);
+  --color-myrbrun: var(--myrbrun);
   --color-terra: var(--terra);
   --color-terra-light: var(--terra-light);
   --color-ochre: var(--ochre);
@@ -73,32 +98,28 @@
   --color-honey: var(--honey);
   --color-honey-light: var(--honey-light);
   --color-honey-soft: var(--honey-soft);
+  --color-kveldsgull: var(--kveldsgull);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
-  --font-sans: var(--font-dm-sans);
-  --font-display: var(--font-playfair);
+  --font-sans: var(--font-karla);
+  --font-display: var(--font-fraunces);
 }
 
 body {
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(245, 213, 145, 0.26) 0%,
-      rgba(245, 213, 145, 0.12) 20%,
-      rgba(255, 251, 242, 0) 46%
-    ),
-    var(--background);
+  background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-family: var(--font-karla), system-ui, sans-serif;
+  font-size: var(--text-body);
+  line-height: 1.65;
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-fraunces), Georgia, serif;
 }
 
-/* Sanity Studio: nøytral bakgrunn, ikke oker eller støy-overlay */
+/* Sanity Studio: nøytral bakgrunn */
 html[data-sanity-studio],
 html[data-sanity-studio] body,
 body[data-sanity-studio] {
@@ -106,35 +127,151 @@ body[data-sanity-studio] {
   color: #1a1a1a !important;
 }
 
-body[data-sanity-studio]::before {
-  opacity: 0 !important;
+/* Typografi-hjelpere */
+.text-hero {
+  font-size: var(--text-hero);
+  line-height: 1.15;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.018;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  mix-blend-mode: multiply;
-  z-index: 9999;
+.text-section {
+  font-size: var(--text-section);
+  line-height: 1.25;
+}
+
+.text-card-title {
+  font-size: var(--text-card-title);
+  line-height: 1.3;
+}
+
+.text-small {
+  font-size: var(--text-small);
+  line-height: 1.55;
+}
+
+.prose-farm {
+  max-width: 65ch;
 }
 
 .prose-farm img,
 .farm-img {
-  border-radius: 1.5rem;
-  border: 2px solid rgb(0 0 0 / 0.1);
-  box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  border: 1px solid var(--farm-border);
 }
 
-/* Gjenbrukbar «flis» / panel som på forsiden */
+.farm-img--bare {
+  border: none;
+  border-radius: 0;
+}
+
+/* Panelstil — flat, uten offset-skygge */
 .farm-panel {
-  border-radius: 1.5rem;
-  border-width: 2px;
-  border-style: solid;
-  border-color: rgb(0 0 0 / 0.1);
-  background-color: var(--farm-cream);
-  box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  border: 1px solid var(--farm-border);
+  background-color: var(--color-havre);
+}
+
+.farm-card {
+  border-radius: 0.25rem;
+  border: 1px solid var(--farm-border);
+  background-color: var(--color-havre);
+}
+
+/* Knapper og lenker */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-myrbrun);
+  background-color: var(--color-myrbrun);
+  color: var(--color-havre);
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.12s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #6a422c;
+  border-color: #5c3825;
+  box-shadow: 0 2px 6px rgba(43, 33, 26, 0.14);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(43, 33, 26, 0.1);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-mosegronn);
+  outline-offset: 2px;
+}
+
+.btn-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-takegraa);
+  background-color: transparent;
+  color: var(--color-tjaresvart);
+  font-weight: 500;
+  transition: background-color 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(215, 208, 191, 0.35);
+}
+
+.link-farm {
+  color: var(--color-mosegronn);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.link-farm:hover {
+  color: var(--color-myrbrun);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Aktivitetskort på forsiden — lenker til birøkt, hønsehold, sauehold */
+.aktivitet-kort {
+  display: block;
+}
+
+.aktivitet-kort__bilde {
+  transition: box-shadow 0.15s ease;
+}
+
+.aktivitet-kort:hover .aktivitet-kort__bilde,
+.aktivitet-kort:focus-visible .aktivitet-kort__bilde {
+  box-shadow: 0 2px 6px rgba(43, 33, 26, 0.14);
+}
+
+.aktivitet-kort__bilde img {
+  transition: transform 0.2s ease;
+}
+
+.aktivitet-kort:hover .aktivitet-kort__bilde img,
+.aktivitet-kort:focus-visible .aktivitet-kort__bilde img {
+  transform: scale(1.02);
+}
+
+.aktivitet-kort__tittel {
+  transition: color 0.15s ease;
+}
+
+.aktivitet-kort:hover .aktivitet-kort__tittel,
+.aktivitet-kort:focus-visible .aktivitet-kort__tittel {
+  color: var(--color-myrbrun);
 }

@@ -11,11 +11,18 @@ import {
 import { dataset, projectId } from "../env";
 import { sanityClient } from "./client";
 
+export type SanityImage = {
+  asset?: { _ref?: string };
+  alt?: string | null;
+  caption?: string | null;
+} | null;
+
 export type LandingDoc = {
   heroTittel?: string | null;
-  heroBilde?: { asset?: { _ref?: string }; alt?: string | null } | null;
+  heroBilde?: SanityImage;
   historieOverskrift?: string | null;
   historieTekst?: PortableTextBlock[] | null;
+  historieBilde?: SanityImage;
 } | null;
 
 export type AktivitetDoc = {
@@ -45,21 +52,10 @@ export type HistorieTidslinjePunkt = {
   bilde?: { asset?: { _ref?: string }; alt?: string | null } | null;
 };
 
-export type HistorieFortellingBlokk = {
-  _key?: string;
-  layout?: "left" | "right" | "full" | null;
-  bilde?: {
-    asset?: { _ref?: string };
-    alt?: string | null;
-    caption?: string | null;
-  } | null;
-  tekst?: PortableTextBlock[] | null;
-};
-
 export type HistorieDoc = {
   tittel?: string | null;
-  heroBilde?: { asset?: { _ref?: string }; alt?: string | null } | null;
-  fortelling?: HistorieFortellingBlokk[] | null;
+  heroBilde?: SanityImage;
+  tekst?: PortableTextBlock[] | null;
   tidslinje?: HistorieTidslinjePunkt[] | null;
 } | null;
 

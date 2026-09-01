@@ -61,7 +61,7 @@ function StoryFigureImage({
         alt={alt}
         width={isInline ? 800 : 1400}
         height={isInline ? 600 : 900}
-        className="w-full rounded-3xl border-2 border-black/10 object-cover shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)]"
+        className="farm-img w-full object-cover"
         sizes={
           isInline
             ? "(min-width: 768px) 47vw, 100vw"
@@ -69,7 +69,7 @@ function StoryFigureImage({
         }
       />
       {caption ? (
-        <figcaption className="mt-3 text-center text-sm font-medium text-moss/90 md:text-left">
+        <figcaption className="mt-3 text-center text-small font-medium text-moss/90 md:text-left">
           {caption}
         </figcaption>
       ) : null}
@@ -102,7 +102,7 @@ function VideoBlock({ value }: { value: AktivitetStoryVideoValue }) {
           {caption}
         </figcaption>
       ) : null}
-      <div className="aspect-video overflow-hidden rounded-3xl border-2 border-black/10 bg-black shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)]">
+      <div className="farm-img aspect-video overflow-hidden bg-black">
         <video
           className="h-full w-full object-cover"
           src={src}
@@ -122,29 +122,29 @@ function VideoBlock({ value }: { value: AktivitetStoryVideoValue }) {
 export const aktivitetStoryPortableComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="mt-5 text-base font-medium leading-relaxed text-foreground first:mt-0 sm:text-lg sm:leading-relaxed">
+      <p className="mt-4 text-[length:var(--text-body)] leading-relaxed text-foreground first:mt-0">
         {children}
       </p>
     ),
     h2: ({ children }) => (
-      <h2 className="mt-12 font-display text-2xl font-bold tracking-tight text-moss first:mt-0 sm:text-3xl md:text-4xl">
+      <h2 className="mt-8 font-display text-section font-semibold text-moss first:mt-0">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mt-10 font-display text-xl font-bold tracking-tight text-moss first:mt-0 sm:text-2xl">
+      <h3 className="mt-6 font-display text-lg font-semibold text-moss first:mt-0">
         {children}
       </h3>
     ),
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="my-6 list-disc space-y-2 pl-6 text-base font-medium text-foreground sm:text-lg">
+      <ul className="my-4 list-disc space-y-1.5 pl-5 text-[length:var(--text-body)] text-foreground">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="my-6 list-decimal space-y-2 pl-6 text-base font-medium text-foreground sm:text-lg">
+      <ol className="my-4 list-decimal space-y-1.5 pl-5 text-[length:var(--text-body)] text-foreground">
         {children}
       </ol>
     ),

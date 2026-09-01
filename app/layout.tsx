@@ -1,24 +1,25 @@
 import type { Metadata } from "next";
-import { DM_Sans, Playfair_Display } from "next/font/google";
+import { Fraunces, Karla } from "next/font/google";
 import { ConditionalFooter } from "./components/ConditionalFooter";
+import { ConditionalNav } from "./components/ConditionalNav";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const karla = Karla({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
-  weight: ["200", "300", "400", "500", "600", "700"],
+  variable: "--font-karla",
+  weight: ["400", "500"],
 });
 
-const playfair = Playfair_Display({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-playfair",
-  weight: ["600", "700", "800", "900"],
+  variable: "--font-fraunces",
+  weight: ["500", "600"],
 });
 
 export const metadata: Metadata = {
   title: "Velkommen til Natlandsmyren",
   description:
-    "Opplev livet på Natlandsmyren – Birøkt, sauehold og lokalproduserte varer.",
+    "Opplev livet på Natlandsmyren – birøkt, sauehold og lokalproduserte varer.",
 };
 
 export default function RootLayout({
@@ -27,8 +28,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="no" className={`${dmSans.variable} ${playfair.variable}`}>
+    <html lang="no" className={`${karla.variable} ${fraunces.variable}`}>
       <body className="flex min-h-screen flex-col bg-background font-sans text-foreground antialiased">
+        <ConditionalNav />
         <main className="flex-1">{children}</main>
         <ConditionalFooter />
       </body>

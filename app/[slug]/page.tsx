@@ -109,19 +109,19 @@ export default async function AktivitetStoryPage({
             <div className="absolute inset-0 bg-cream-deep" aria-hidden />
           )}
           <div
-            className="absolute inset-0 z-[1] bg-black/60 sm:bg-black/58"
+            className="absolute inset-0 z-[1] bg-black/50"
             aria-hidden
           />
           <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-5 px-5 sm:gap-6 sm:px-8 md:px-12 lg:px-16">
             <Link
               href="/"
-              className="rounded-md text-sm font-semibold text-white/90 underline decoration-white/50 underline-offset-2 transition hover:text-white hover:decoration-white"
+              className="text-sm font-medium text-white/90 underline decoration-white/50 underline-offset-2 transition hover:text-white hover:decoration-white"
             >
               Til forsiden
             </Link>
             <h1
               id="aktivitet-story-hero-heading"
-              className="max-w-4xl text-center font-display text-[clamp(2rem,5.8vw+0.65rem,3.5rem)] font-black leading-[1.04] tracking-tight text-white antialiased drop-shadow-[0_7px_42px_rgba(0,0,0,0.9)] sm:text-[clamp(2.35rem,5.1vw+0.9rem,4rem)] md:text-[clamp(2.8rem,4.2vw+1.1rem,4.6rem)] lg:text-7xl lg:leading-[1.02]"
+              className="max-w-3xl text-center font-display text-hero font-semibold tracking-tight text-white antialiased drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)]"
             >
               {doc.tittel}
             </h1>
@@ -131,30 +131,27 @@ export default async function AktivitetStoryPage({
 
       <div className="mx-auto w-full max-w-4xl px-4 pb-24 pt-14 sm:px-6 sm:pb-28 sm:pt-16 md:px-8 md:pb-32 md:pt-20">
         <article
-          className="rounded-3xl border-2 border-black/10 bg-card px-7 py-10 shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] sm:px-10 sm:py-12 md:px-14 md:py-14"
+          className="farm-panel prose-farm px-6 py-8 sm:px-8 sm:py-10 md:px-10 md:py-12"
           style={aksentStyle}
         >
           <p
-            className="border-l-4 pl-5 text-lg font-medium leading-relaxed text-foreground sm:text-xl sm:leading-relaxed md:pl-6"
+            className="max-w-prose border-l-[3px] pl-4 text-[length:var(--text-body)] leading-relaxed text-foreground sm:pl-5"
             style={{
-              borderColor: "var(--aktivitet-aksent, #2d3a27)",
+              borderColor: "var(--aktivitet-aksent, var(--color-mosegronn))",
             }}
           >
             {doc.beskrivelse}
           </p>
           {hasBody ? (
-            <div className="mt-10 border-t border-moss/20 pt-10 flow-root">
+            <div className="mt-10 max-w-prose border-t border-[var(--farm-border)] pt-10 flow-root">
               <PortableText
                 value={bodyBlocks as TypedObject[]}
                 components={aktivitetStoryPortableComponents}
               />
             </div>
           ) : null}
-          <p className="mt-14 border-t border-moss/20 pt-10 text-center">
-            <Link
-              href="/"
-              className="font-bold text-moss underline decoration-moss decoration-4 underline-offset-[5px] transition hover:text-foreground hover:decoration-foreground"
-            >
+          <p className="mt-14 border-t border-[var(--farm-border)] pt-10 text-center">
+            <Link href="/" className="link-farm font-medium">
               Tilbake til forsiden
             </Link>
           </p>

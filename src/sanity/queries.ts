@@ -8,7 +8,11 @@ export const landingssideQuery = defineQuery(`
       alt
     },
     historieOverskrift,
-    historieTekst
+    historieTekst,
+    historieBilde {
+      asset,
+      alt
+    }
   }
 `);
 
@@ -21,7 +25,11 @@ export const landingssideFallbackQuery = defineQuery(`
       alt
     },
     historieOverskrift,
-    historieTekst
+    historieTekst,
+    historieBilde {
+      asset,
+      alt
+    }
   }
 `);
 
@@ -108,15 +116,13 @@ export const historieQuery = defineQuery(`
       asset,
       alt
     },
-    fortelling[]{
-      _key,
-      layout,
-      bilde {
+    tekst[]{
+      ...,
+      _type == "image" => {
         asset,
         alt,
         caption
-      },
-      tekst
+      }
     },
     tidslinje[]{
       _key,
@@ -138,15 +144,13 @@ export const historieFallbackQuery = defineQuery(`
       asset,
       alt
     },
-    fortelling[]{
-      _key,
-      layout,
-      bilde {
+    tekst[]{
+      ...,
+      _type == "image" => {
         asset,
         alt,
         caption
-      },
-      tekst
+      }
     },
     tidslinje[]{
       _key,

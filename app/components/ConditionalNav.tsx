@@ -1,11 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { FarmFooter } from "./FarmFooter";
+import { SiteNav } from "./SiteNav";
 
-export function ConditionalFooter() {
+export function ConditionalNav() {
   const pathname = usePathname();
   if (pathname?.startsWith("/studio")) return null;
   if (pathname === "/under-utvikling") return null;
-  return <FarmFooter />;
+  return <SiteNav />;
 }

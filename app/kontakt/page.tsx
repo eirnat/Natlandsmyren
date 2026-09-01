@@ -11,32 +11,28 @@ export default function KontaktPage() {
     <div className="mx-auto max-w-5xl px-6 py-12 md:px-8 md:py-16">
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
         <div className="farm-panel p-8 md:p-10">
-          <h1 className="font-display text-3xl font-bold text-foreground md:text-4xl">
+          <h1 className="font-display text-section font-semibold text-foreground">
             Kontakt
           </h1>
           <p className="mt-5 font-medium leading-relaxed text-foreground md:text-lg">
             Vil du stille et spørsmål, avtale besøk eller bare si hei? Legg inn
             e-post, telefon eller et enkelt skjema her når du er klar.
           </p>
-          <dl className="mt-8 space-y-4 font-medium text-foreground">
+          <dl className="mt-8 space-y-4 text-foreground">
             <div>
-              <dt className="text-sm font-bold uppercase tracking-wide text-moss">
-                E-post
-              </dt>
+              <dt className="text-small font-medium text-moss">E-post</dt>
               <dd className="mt-1">
                 <span className="text-foreground/70">din@epost.no</span>
               </dd>
             </div>
             <div>
-              <dt className="text-sm font-bold uppercase tracking-wide text-moss">
-                Sted
-              </dt>
+              <dt className="text-small font-medium text-moss">Sted</dt>
               <dd className="mt-1">{GARD_NAVN}</dd>
             </div>
           </dl>
         </div>
         <div
-          className="farm-img flex min-h-[280px] items-center justify-center rounded-3xl border-2 border-black/10 bg-card p-8 text-center shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] md:min-h-0"
+          className="farm-img flex min-h-[280px] items-center justify-center bg-card p-8 text-center md:min-h-0"
           role="img"
           aria-label="Plassholder for kart eller bilde"
         >

@@ -10,7 +10,7 @@ export default function DyrenePage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-12 md:px-8 md:py-16">
       <header className="mb-12 text-center md:mb-16">
-        <h1 className="font-display text-3xl font-bold text-foreground md:text-4xl">
+        <h1 className="font-display text-section font-semibold text-foreground">
           Dyrene
         </h1>
         <p className="mx-auto mt-4 max-w-xl font-medium text-foreground/85 md:text-lg">

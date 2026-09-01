@@ -2,16 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { PortableText, type PortableTextComponents } from "@portabletext/react";
+import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import { GARD_NAVN } from "../lib/gard";
 import {
-  type HistorieFortellingBlokk,
   getHistorieData,
   type HistorieTidslinjePunkt,
 } from "../../src/sanity/lib/home-data";
 import { urlFor } from "../../src/sanity/lib/image";
-import { FadeInOnScroll } from "../components/FadeInOnScroll";
+import { historieProsePortableComponents } from "../components/prosePortableText";
 
 export const metadata: Metadata = {
   title: `Historie – ${GARD_NAVN}`,
@@ -19,8 +18,6 @@ export const metadata: Metadata = {
 };
 
 const FALLBACK_TITTEL = "Historien om Natlandsmyren";
-const FALLBACK_INTRO =
-  "Historien om Natlandsmyren er en fortelling om jord, arbeid og familier som har satt spor over generasjoner.";
 
 const FALLBACK_TIDSLINJE: HistorieTidslinjePunkt[] = [
   {
@@ -46,54 +43,34 @@ const FALLBACK_TIDSLINJE: HistorieTidslinjePunkt[] = [
   },
 ];
 
-const FALLBACK_FORTELLING: HistorieFortellingBlokk[] = [
+const FALLBACK_TEKST: PortableTextBlock[] = [
   {
+    _type: "block",
     _key: "fallback-story-1",
-    layout: "left",
-    bilde: {
-      alt: "Natlandsmyren i sommerlys",
-      caption: "Tunet i kveldssol",
-    },
-    tekst: [
+    style: "normal",
+    markDefs: [],
+    children: [
       {
-        _type: "block",
-        _key: "f1",
-        style: "normal",
-        markDefs: [],
-        children: [
-          {
-            _type: "span",
-            _key: "f1a",
-            text: "På Natlandsmyren følger hverdagen årstidene. Arbeidet på gården går i rytme med naturen, og små hendelser blir til minner som bærer historien videre.",
-            marks: [],
-          },
-        ],
+        _type: "span",
+        _key: "f1a",
+        text: "På Natlandsmyren følger hverdagen årstidene. Arbeidet på gården går i rytme med naturen, og små hendelser blir til minner som bærer historien videre.",
+        marks: [],
       },
-    ] as PortableTextBlock[],
+    ],
   },
   {
+    _type: "block",
     _key: "fallback-story-2",
-    layout: "right",
-    bilde: {
-      alt: "Historisk utsnitt fra Natlandsmyren",
-      caption: "Spor av arbeid og tradisjon",
-    },
-    tekst: [
+    style: "normal",
+    markDefs: [],
+    children: [
       {
-        _type: "block",
-        _key: "f2",
-        style: "normal",
-        markDefs: [],
-        children: [
-          {
-            _type: "span",
-            _key: "f2a",
-            text: "Menneskene som har levd her har formet landskapet med omtanke. Historien handler ikke bare om årstall, men om valg, fellesskap og tilhørighet.",
-            marks: [],
-          },
-        ],
+        _type: "span",
+        _key: "f2a",
+        text: "Menneskene som har levd her har formet landskapet med omtanke. Historien handler ikke bare om årstall, men om valg, fellesskap og tilhørighet.",
+        marks: [],
       },
-    ] as PortableTextBlock[],
+    ],
   },
 ];
 
@@ -108,57 +85,13 @@ function timelineImageUrl(
   }
 }
 
-function fortellingImageUrl(
-  bilde: HistorieFortellingBlokk["bilde"],
-): string | null {
-  if (!bilde?.asset?._ref) return null;
-  try {
-    return urlFor(bilde).width(1800).quality(90).auto("format").url();
-  } catch {
-    return null;
-  }
-}
-
-function blocksToPlainText(blocks?: PortableTextBlock[] | null): string {
-  if (!blocks || blocks.length === 0) return "";
-  const block = blocks.find((b) => b?._type === "block");
-  if (!block || !Array.isArray(block.children)) return "";
-  return block.children
-    .map((child) => (typeof child.text === "string" ? child.text : ""))
-    .join("")
-    .trim();
-}
-
-const fortellingPortableComponents: PortableTextComponents = {
-  block: {
-    normal: ({ children }) => (
-      <p className="mt-4 font-display text-lg leading-relaxed text-[#2D3A27] first:mt-0 sm:text-xl">
-        {children}
-      </p>
-    ),
-  },
-  marks: {
-    strong: ({ children }) => (
-      <strong className="font-black text-[#8B4513]">{children}</strong>
-    ),
-    em: ({ children }) => <em className="italic text-[#2D3A27]">{children}</em>,
-  },
-};
-
 export default async function HistoriePage() {
   const historie = await getHistorieData();
   const tittel = historie?.tittel?.trim() || FALLBACK_TITTEL;
-  const fortellingRaw =
-    historie?.fortelling?.filter(
-      (blokk) =>
-        !!blokk &&
-        !!blokk.layout &&
-        !!blokk.bilde &&
-        !!blokk.tekst &&
-        blokk.tekst.length > 0,
-    ) ?? [];
-  const fortelling =
-    fortellingRaw.length > 0 ? fortellingRaw : FALLBACK_FORTELLING;
+  const tekst =
+    historie?.tekst && historie.tekst.length > 0
+      ? historie.tekst
+      : FALLBACK_TEKST;
   const tidslinjeRaw =
     historie?.tidslinje?.filter(
       (punkt) =>
@@ -168,10 +101,6 @@ export default async function HistoriePage() {
         !!punkt.beskrivelse?.trim(),
     ) ?? [];
   const tidslinje = tidslinjeRaw.length > 0 ? tidslinjeRaw : FALLBACK_TIDSLINJE;
-  const intro =
-    blocksToPlainText(fortelling[0]?.tekst) ||
-    tidslinje[0]?.beskrivelse?.trim() ||
-    FALLBACK_INTRO;
 
   const heroUrl = (() => {
     if (!historie?.heroBilde?.asset?._ref) return "/images/gardsommer.jpg";
@@ -184,121 +113,55 @@ export default async function HistoriePage() {
   const heroAlt = historie?.heroBilde?.alt?.trim() || `${tittel} på ${GARD_NAVN}`;
 
   return (
-    <div className="bg-[#F4F1EA]">
-      <section className="relative w-full border-b border-black/10">
+    <div className="bg-background">
+      <section className="relative w-full border-b border-[var(--farm-border)]">
         <div className="absolute left-4 top-4 z-[3] sm:left-6 sm:top-6 md:left-8">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 rounded-full bg-[#FFFBF2]/85 px-4 py-2 text-sm font-semibold text-[#2D3A27] shadow-[0_2px_12px_rgba(0,0,0,0.14)] backdrop-blur-sm transition hover:bg-[#FFFBF2]"
-          >
+          <Link href="/" className="btn-secondary px-3 py-1.5 text-sm">
             <ArrowLeft className="h-4 w-4" aria-hidden />
             Hjem
           </Link>
         </div>
-        <div className="relative mx-auto max-w-6xl p-4 pt-20 sm:px-6 sm:pt-24 md:px-8 md:pt-28">
-          <div className="relative aspect-[16/8] overflow-hidden rounded-3xl border-2 border-black/10 bg-[#e6decf] shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)]">
-            <Image
-              src={heroUrl}
-              alt={heroAlt}
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 1200px"
-              priority
-            />
-            <div className="absolute inset-0 bg-black/28" aria-hidden />
-            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 md:p-10">
-              <h1 className="max-w-3xl font-display text-4xl font-black leading-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.7)] sm:text-5xl md:text-6xl">
-                {tittel}
-              </h1>
-            </div>
+        <div className="relative aspect-[16/8] w-full min-h-[220px] sm:min-h-[280px]">
+          <Image
+            src={heroUrl}
+            alt={heroAlt}
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/30" aria-hidden />
+          <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 md:p-8">
+            <h1 className="max-w-2xl font-display text-hero font-semibold text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+              {tittel}
+            </h1>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 pb-20 pt-10 sm:px-6 sm:pb-24 sm:pt-14 md:px-8">
-        <article className="rounded-3xl border-2 border-black/10 bg-[#F4F1EA] px-6 py-7 shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] sm:px-8 sm:py-9 md:px-10">
-          <p className="font-display text-lg leading-relaxed text-[#2D3A27] sm:text-xl">
-            <span className="float-left mr-3 mt-0.5 font-display text-5xl font-semibold leading-none text-[#2D3A27] sm:text-6xl">
-              {intro.charAt(0) || "H"}
-            </span>
-            {intro.slice(1) ||
-              "er forteller vi historien om mennesker, dyr og landskap på Natlandsmyren."}
-          </p>
+      <section className="mx-auto max-w-4xl px-4 py-[var(--space-4)] sm:px-6 md:px-8">
+        <article className="farm-panel prose-farm px-6 py-7 sm:px-8 sm:py-8">
+          <PortableText
+            value={tekst}
+            components={historieProsePortableComponents}
+          />
         </article>
 
-        <div className="mt-14 space-y-10 sm:space-y-14">
-          {fortelling.map((blokk, index) => {
-            const isOdd = index % 2 === 1;
-            const bildeUrl = fortellingImageUrl(blokk.bilde);
-            const bildeAlt = blokk.bilde?.alt?.trim() || `${tittel} – bilde`;
-            const caption = blokk.bilde?.caption?.trim();
-            const tekst = blokk.tekst ?? [];
-
-            const imagePanel = (
-              <div className="relative overflow-hidden rounded-3xl border-2 border-white bg-[#ede3cf] p-2 shadow-[0_6px_18px_rgba(0,0,0,0.12)]">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-                  <Image
-                    src={bildeUrl || "/images/gardsommer.jpg"}
-                    alt={bildeAlt}
-                    fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </div>
-                {caption ? (
-                  <p className="px-2 pb-1 pt-3 text-sm font-medium text-[#6d5b44]">
-                    {caption}
-                  </p>
-                ) : null}
-              </div>
-            );
-
-            const textPanel = (
-              <div className="rounded-3xl border-2 border-black/10 bg-[#FFFBF2] px-6 py-6 shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] sm:px-7 sm:py-7">
-                <PortableText
-                  value={tekst}
-                  components={fortellingPortableComponents}
-                />
-              </div>
-            );
-
-            const content = (
-              <div
-                className={`flex flex-col gap-6 md:items-stretch md:gap-8 ${
-                  isOdd ? "md:flex-row-reverse" : "md:flex-row"
-                }`}
-              >
-                <div className="md:w-1/2">{imagePanel}</div>
-                <div className="md:w-1/2">{textPanel}</div>
-              </div>
-            );
-
-            return (
-              <FadeInOnScroll
-                key={blokk._key ?? `fortelling-${index}`}
-                delayMs={Math.min(index * 80, 320)}
-              >
-                {content}
-              </FadeInOnScroll>
-            );
-          })}
+        <div className="my-[var(--space-4)] flex items-center gap-4" aria-hidden>
+          <span className="h-px flex-1 bg-[var(--farm-border)]" />
+          <span className="inline-block h-2 w-2 rounded-full bg-moss/50" />
+          <span className="h-px flex-1 bg-[var(--farm-border)]" />
         </div>
 
-        <div className="my-14 flex items-center gap-4" aria-hidden>
-          <span className="h-px flex-1 bg-[#4B5B30]/45" />
-          <span className="inline-block h-3 w-3 rounded-full bg-[#4B5B30]/65" />
-          <span className="h-px flex-1 bg-[#4B5B30]/45" />
-        </div>
-
-        <div className="relative mt-12 pl-10 sm:pl-14">
-          <h2 className="mb-6 font-display text-3xl font-black text-[#8B4513] sm:text-4xl">
+        <div className="relative pl-8 sm:pl-10">
+          <h2 className="mb-5 font-display text-section font-semibold text-[var(--farm-history-accent)]">
             Viktige milepæler
           </h2>
           <div
-            className="absolute bottom-0 left-[0.9rem] top-0 w-px bg-[#8B4513]/35 sm:left-[1.65rem]"
+            className="absolute bottom-0 left-[0.55rem] top-0 w-px bg-[var(--farm-history-accent)]/25 sm:left-[0.85rem]"
             aria-hidden
           />
-          <div className="space-y-10 sm:space-y-12">
+          <div className="space-y-6 sm:space-y-8">
             {tidslinje.map((punkt) => {
               const bildeUrl = timelineImageUrl(punkt.bilde);
               const aarstall = punkt.aarstall?.trim() || "Ukjent år";
@@ -306,41 +169,41 @@ export default async function HistoriePage() {
               const beskrivelse = punkt.beskrivelse?.trim() || "";
 
               return (
-                <FadeInOnScroll
+                <div
                   key={punkt._key ?? `${aarstall}-${hendelseTittel}`}
                   className="relative"
                 >
                   <span
-                    className="absolute left-[-2.1rem] top-2 h-4 w-4 rounded-full border-2 border-[#8B4513]/70 bg-[#F4F1EA] sm:left-[-2.73rem]"
+                    className="absolute left-[-1.65rem] top-2 h-3 w-3 rounded-full border-2 border-[var(--farm-history-accent)]/60 bg-background sm:left-[-2rem]"
                     aria-hidden
                   />
-                  <div className="flex flex-col gap-6 rounded-3xl border-2 border-black/10 bg-[#FFFBF2] p-5 shadow-[6px_6px_0pt_0pt_rgba(0,0,0,0.1)] sm:flex-row sm:items-start sm:gap-8 sm:p-6">
-                    <div className="flex-grow">
-                      <p className="font-sans text-[0.68rem] font-black uppercase tracking-[0.2em] text-[#8B4513] sm:text-xs">
+                  <div className="flex flex-col gap-4 border-b border-[var(--farm-border)] pb-6 last:border-b-0 md:flex-row md:items-start md:gap-6 lg:gap-8">
+                    <div className="min-w-0 flex-1">
+                      <p className="text-small font-medium text-[var(--farm-history-accent)]">
                         {aarstall}
                       </p>
-                      <h3 className="mt-2 font-display text-xl font-black leading-tight text-[#8B4513] sm:text-2xl">
+                      <h3 className="mt-1 font-display text-card-title font-semibold text-[var(--farm-history-accent)]">
                         {hendelseTittel}
                       </h3>
-                      <p className="mt-3 text-sm font-medium leading-relaxed text-[#2D3A27] sm:text-base">
+                      <p className="mt-2 max-w-prose text-base leading-relaxed text-foreground/85">
                         {beskrivelse}
                       </p>
                     </div>
                     {bildeUrl ? (
-                      <div className="relative w-32 max-w-[150px] flex-shrink-0 overflow-hidden rounded-3xl border-2 border-white bg-[#ede3cf] p-2 shadow-[0_6px_18px_rgba(0,0,0,0.12)] sm:w-36 md:w-40">
-                        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                      <div className="farm-img relative w-full shrink-0 overflow-hidden sm:max-w-xs md:w-44 md:max-w-none lg:w-52">
+                        <div className="relative aspect-[4/3]">
                           <Image
                             src={bildeUrl}
                             alt={punkt.bilde?.alt?.trim() || hendelseTittel}
                             fill
                             className="object-cover object-center"
-                            sizes="(max-width: 640px) 128px, (max-width: 768px) 144px, 160px"
+                            sizes="(max-width: 767px) 100vw, 208px"
                           />
                         </div>
                       </div>
                     ) : null}
                   </div>
-                </FadeInOnScroll>
+                </div>
               );
             })}
           </div>

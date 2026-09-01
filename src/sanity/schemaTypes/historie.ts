@@ -4,116 +4,94 @@ export const historie = defineType({
   name: "historie",
   title: "Historie",
   type: "document",
+  fieldsets: [
+    {
+      name: "topp",
+      title: "Topp",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "fortelling",
+      title: "Fortelling",
+      options: { collapsible: true, collapsed: false },
+    },
+    {
+      name: "tidslinje",
+      title: "Tidslinje",
+      options: { collapsible: true, collapsed: false },
+    },
+  ],
   fields: [
     defineField({
       name: "tittel",
       title: "Tittel",
       type: "string",
+      fieldset: "topp",
       initialValue: "Historien om Natlandsmyren",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "heroBilde",
-      title: "Hero-bilde",
+      title: "Toppbilde",
       type: "image",
+      fieldset: "topp",
       options: { hotspot: true },
       fields: [
         defineField({
           name: "alt",
           title: "Alternativ tekst",
           type: "string",
+          description: "Kort beskrivelse av bildet for blinde og svaksynte.",
         }),
       ],
+      description: "Bildet øverst på historie-siden.",
     }),
     defineField({
-      name: "fortelling",
-      title: "Fortelling (bilde + tekstblokker)",
+      name: "tekst",
+      title: "Fortelling",
       type: "array",
+      fieldset: "fortelling",
+      description:
+        "Skriv historien her. Bruk +-knappen for å sette inn bilder mellom avsnittene.",
       of: [
-        defineArrayMember({
-          name: "historieFortellingBlokk",
-          title: "Fortellingsblokk",
-          type: "object",
+        {
+          type: "block",
+          styles: [{ title: "Normal", value: "normal" }],
+          lists: [],
+          marks: {
+            decorators: [
+              { title: "Fet", value: "strong" },
+              { title: "Kursiv", value: "em" },
+            ],
+            annotations: [],
+          },
+        },
+        {
+          type: "image",
+          options: { hotspot: true },
           fields: [
             defineField({
-              name: "bilde",
-              title: "Bilde",
-              type: "image",
-              options: { hotspot: true },
-              fields: [
-                defineField({
-                  name: "alt",
-                  title: "Alternativ tekst",
-                  type: "string",
-                }),
-                defineField({
-                  name: "caption",
-                  title: "Bildetekst",
-                  type: "string",
-                }),
-              ],
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: "tekst",
-              title: "Tekst",
-              type: "array",
-              of: [
-                {
-                  type: "block",
-                  styles: [{ title: "Normal", value: "normal" }],
-                  lists: [],
-                  marks: {
-                    decorators: [
-                      { title: "Fet", value: "strong" },
-                      { title: "Kursiv", value: "em" },
-                    ],
-                    annotations: [],
-                  },
-                },
-              ],
-              validation: (Rule) => Rule.required().min(1),
-            }),
-            defineField({
-              name: "layout",
-              title: "Layout",
+              name: "alt",
+              title: "Alternativ tekst",
               type: "string",
-              options: {
-                list: [
-                  { title: "Bilde til venstre", value: "left" },
-                  { title: "Bilde til høyre", value: "right" },
-                  { title: "Fullbredde bilde", value: "full" },
-                ],
-                layout: "dropdown",
-              },
-              initialValue: "left",
-              validation: (Rule) => Rule.required(),
+              description: "Kort beskrivelse av bildet for blinde og svaksynte.",
+            }),
+            defineField({
+              name: "caption",
+              title: "Bildetekst",
+              type: "string",
             }),
           ],
-          preview: {
-            select: {
-              title: "bilde.caption",
-              subtitle: "layout",
-              media: "bilde",
-            },
-            prepare: ({ title, subtitle, media }) => ({
-              title: title || "Fortellingsblokk",
-              subtitle:
-                subtitle === "left"
-                  ? "Bilde til venstre"
-                  : subtitle === "right"
-                    ? "Bilde til høyre"
-                    : "Fullbredde bilde",
-              media,
-            }),
-          },
-        }),
+        },
       ],
     }),
     defineField({
       name: "tidslinje",
       title: "Tidslinje",
       type: "array",
+      fieldset: "tidslinje",
+      description:
+        "Viktige milepæler i gårdens historie. Legg til ett punkt om gangen.",
       of: [
         defineArrayMember({
           name: "historieTidslinjePunkt",
@@ -141,7 +119,7 @@ export const historie = defineType({
             }),
             defineField({
               name: "bilde",
-              title: "Bilde",
+              title: "Bilde (valgfritt)",
               type: "image",
               options: { hotspot: true },
               fields: [
